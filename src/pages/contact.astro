@@ -1,0 +1,41 @@
+---
+import MainLayout from "../layouts/MainLayout.astro";
+import LeadForm from "../components/LeadForm.astro";
+---
+<MainLayout
+  title="Contact KUEM"
+  description="Request a utility IoT demo or submit a partner inquiry. KUEM integrates lead forms with Odoo CRM."
+>
+  <section class="hero">
+    <div class="container">
+      <p class="eyebrow">Contact</p>
+      <h1>Talk to KUEM about your deployment priorities.</h1>
+      <p>
+        Use the forms below for demo requests and partner inquiries. Submissions are processed through GDPR-aware forms
+        and can be forwarded to Odoo CRM.
+      </p>
+    </div>
+  </section>
+
+  <section>
+    <div class="container split">
+      <LeadForm formId="demo-form" heading="Demo request" submitLabel="Send request" sourcePage="contact" />
+      <LeadForm
+        formType="partner"
+        formId="partner-form"
+        heading="Partner inquiry"
+        submitLabel="Send partner inquiry"
+        sourcePage="contact"
+      />
+    </div>
+  </section>
+
+  <section>
+    <div class="container card">
+      <h2>Direct contact</h2>
+      <p>Email: <a href="mailto:info@kuem.eu">info@kuem.eu</a></p>
+      <p>Phone: <a href="tel:+32000000000">+32 000 00 00 00</a></p>
+      <p>Address: Brussels, Belgium</p>
+    </div>
+  </section>
+</MainLayout>

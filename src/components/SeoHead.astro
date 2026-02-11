@@ -1,0 +1,14 @@
+---
+const { title = "KUEM | IoT Solutions for Utilities", description = "KUEM delivers smart utility metering and industrial IoT solutions powered by Nexavia.", pathname = "/" } = Astro.props;
+const canonical = new URL(pathname, Astro.site);
+---
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>{title}</title>
+<meta name="description" content={description} />
+<link rel="canonical" href={canonical.toString()} />
+<meta property="og:type" content="website" />
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description} />
+<meta property="og:url" content={canonical.toString()} />
+<meta name="twitter:card" content="summary_large_image" />

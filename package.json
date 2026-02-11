@@ -1,0 +1,15 @@
+{
+  "name": "kuem-website",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview"
+  },
+  "dependencies": {
+    "@astrojs/node": "^9.5.2",
+    "astro": "^5.2.0"
+  }
+}

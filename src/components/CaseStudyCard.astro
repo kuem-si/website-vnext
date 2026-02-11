@@ -1,0 +1,15 @@
+---
+import type { CaseStudy } from "../lib/content";
+
+const { item } = Astro.props as { item: CaseStudy };
+---
+<article class="card">
+  <p class="eyebrow">{item.vertical}</p>
+  <h3>{item.title}</h3>
+  <p><strong>Challenge:</strong> {item.challenge}</p>
+  <p><strong>Solution:</strong> {item.solution}</p>
+  <p><strong>Deployment:</strong> {item.deployment}</p>
+  <ul>
+    {item.results.map((result) => <li>{result}</li>)}
+  </ul>
+</article>

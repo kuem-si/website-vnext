@@ -1,0 +1,104 @@
+---
+const {
+  formType = "demo",
+  heading = "Request a demo",
+  submitLabel = "Submit request",
+  sourcePage = "unknown",
+  formId
+} = Astro.props;
+const statusId = `${formType}-status`;
+---
+<form class="lead-form" id={formId} data-lead-form data-form-type={formType} data-source-page={sourcePage}>
+  <h3>{heading}</h3>
+  <div class="form-grid">
+    <label>
+      Full name
+      <input type="text" name="fullName" required autocomplete="name" />
+    </label>
+    <label>
+      Company
+      <input type="text" name="company" required autocomplete="organization" />
+    </label>
+    <label>
+      Role
+      <input type="text" name="role" required autocomplete="organization-title" />
+    </label>
+    <label>
+      Work email
+      <input type="email" name="email" required autocomplete="email" />
+    </label>
+    <label>
+      Phone
+      <input type="tel" name="phone" autocomplete="tel" />
+    </label>
+    <label>
+      Country
+      <input type="text" name="country" autocomplete="country-name" />
+    </label>
+  </div>
+  <label>
+    Message
+    <textarea name="message" rows="5" required></textarea>
+  </label>
+  <input type="text" name="website" tabindex="-1" autocomplete="off" class="hp-field" aria-hidden="true" />
+  <label class="consent-check">
+    <input type="checkbox" name="consent" value="yes" required />
+    I consent to KUEM storing my data to respond to this inquiry in line with GDPR.
+  </label>
+  <button class="btn btn-primary" type="submit">{submitLabel}</button>
+  <p id={statusId} class="form-status" role="status" aria-live="polite"></p>
+</form>
+
+<script>
+  const forms = document.querySelectorAll("[data-lead-form]");
+
+  forms.forEach((form) => {
+    if (form.dataset.bound === "true") return;
+    form.dataset.bound = "true";
+    form.addEventListener("submit", async (event) => {
+      event.preventDefault();
+      const target = event.currentTarget;
+      const status = target.querySelector(".form-status");
+      const data = new FormData(target);
+
+      if (data.get("website")) {
+        if (status) status.textContent = "Submission blocked.";
+        return;
+      }
+
+      const payload = {
+        leadType: target.dataset.formType,
+        sourcePage: target.dataset.sourcePage,
+        fullName: String(data.get("fullName") || ""),
+        company: String(data.get("company") || ""),
+        role: String(data.get("role") || ""),
+        email: String(data.get("email") || ""),
+        phone: String(data.get("phone") || ""),
+        country: String(data.get("country") || ""),
+        message: String(data.get("message") || ""),
+        consent: data.get("consent") === "yes"
+      };
+
+      if (status) status.textContent = "Submitting...";
+
+      try {
+        const response = await fetch("/api/lead", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload)
+        });
+
+        const result = await response.json();
+
+        if (!response.ok) {
+          throw new Error(result.error || "Request failed");
+        }
+
+        if (status) status.textContent = "Thank you. We will contact you shortly.";
+        target.reset();
+      } catch (error) {
+        if (status) status.textContent = "We could not submit the form. Please email info@kuem.eu.";
+      }
+    });
+  });
+</script>

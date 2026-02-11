@@ -1,0 +1,27 @@
+---
+import { navItems } from "../lib/content";
+
+const path = Astro.url.pathname;
+---
+<header class="site-header">
+  <div class="container header-inner">
+    <a href="/" class="brand" aria-label="KUEM home">
+      <span class="brand-mark">K</span>
+      <span class="brand-text">KUEM</span>
+    </a>
+    <nav aria-label="Main navigation">
+      <ul class="nav-list">
+        {
+          navItems.map((item) => (
+            <li>
+              <a href={item.href} aria-current={path === item.href ? "page" : undefined}>
+                {item.label}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
+    <a href="/contact#demo-form" class="btn btn-primary">Request a demo</a>
+  </div>
+</header>

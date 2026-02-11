@@ -1,0 +1,116 @@
+---
+import MainLayout from "../layouts/MainLayout.astro";
+import Metrics from "../components/Metrics.astro";
+import CTASection from "../components/CTASection.astro";
+import LeadForm from "../components/LeadForm.astro";
+import CaseStudyCard from "../components/CaseStudyCard.astro";
+import { caseStudies, utilityUseCases, industrialUseCases } from "../lib/content";
+---
+<MainLayout
+  title="KUEM | Smart Utility Metering and IoT Platform"
+  description="KUEM helps water and gas utilities reduce losses, improve reliability, and integrate telemetry into SCADA and billing systems."
+>
+  <section class="hero">
+    <div class="container hero-grid">
+      <div>
+        <p class="eyebrow">IoT solutions for utilities and infrastructure</p>
+        <h1>Smart metering and operational IoT with measurable business impact.</h1>
+        <p>
+          KUEM delivers utility-focused IoT deployments powered by Nexavia. We help water and gas operators reduce
+          non-revenue loss, improve reliability, and integrate operational data into SCADA and billing systems.
+        </p>
+        <div style="display:flex; gap:.75rem; margin-top:1rem; flex-wrap:wrap;">
+          <a class="btn btn-primary" href="/contact#demo-form">Request a demo</a>
+          <a class="btn btn-secondary" href="/case-studies">View case studies</a>
+        </div>
+      </div>
+      <aside class="panel">
+        <h2>Why utilities choose KUEM</h2>
+        <ul>
+          {utilityUseCases.slice(0, 5).map((item) => <li>{item}</li>)}
+        </ul>
+      </aside>
+    </div>
+  </section>
+
+  <section>
+    <div class="container">
+      <h2>Proven deployment footprint</h2>
+      <Metrics />
+    </div>
+  </section>
+
+  <section>
+    <div class="container split">
+      <article class="card">
+        <p class="eyebrow">Primary focus</p>
+        <h2>Utilities solutions</h2>
+        <p>
+          Smart water and gas metering, plus infrastructure monitoring for utility operations. Designed to integrate with
+          existing SCADA, billing, and maintenance workflows.
+        </p>
+        <a class="btn btn-secondary" href="/utilities">Explore utility solutions</a>
+      </article>
+      <article class="card">
+        <p class="eyebrow">Growth segment</p>
+        <h2>Industrial IoT</h2>
+        <p>
+          Operational monitoring for industrial teams: temperature, energy, environmental sensing, and asset tracking
+          projects that target efficiency and downtime reduction.
+        </p>
+        <ul>
+          {industrialUseCases.slice(0, 4).map((item) => <li>{item}</li>)}
+        </ul>
+        <a class="btn btn-secondary" href="/industrial-iot">Explore industrial IoT</a>
+      </article>
+    </div>
+  </section>
+
+  <section>
+    <div class="container split">
+      <article class="card">
+        <p class="eyebrow">Platform</p>
+        <h2>Nexavia</h2>
+        <p>
+          Device lifecycle control, multi-network connectivity, analytics, and API integrations in a single platform with
+          cloud and on-prem deployment options.
+        </p>
+        <a class="btn btn-secondary" href="/nexavia-platform">See the platform</a>
+      </article>
+      <article class="card">
+        <p class="eyebrow">Scale with partners</p>
+        <h2>Partner program</h2>
+        <p>
+          KUEM works with system integrators and technology partners to deploy utility and infrastructure projects in the
+          EU market.
+        </p>
+        <a class="btn btn-secondary" href="/partner-program#partner-form">Become a partner</a>
+      </article>
+    </div>
+  </section>
+
+  <section>
+    <div class="container">
+      <h2>Selected deployments</h2>
+      <div class="grid-3">
+        {caseStudies.map((item) => <CaseStudyCard item={item} />)}
+      </div>
+    </div>
+  </section>
+
+  <CTASection />
+
+  <section>
+    <div class="container split" id="demo-form">
+      <div>
+        <p class="eyebrow">Fast next step</p>
+        <h2>Book a utility-focused demo</h2>
+        <p>
+          Share your operational goals and integration environment. KUEM will propose a practical pilot scope, timeline,
+          and integration path.
+        </p>
+      </div>
+      <LeadForm heading="Request a demo" submitLabel="Send demo request" sourcePage="homepage" />
+    </div>
+  </section>
+</MainLayout>

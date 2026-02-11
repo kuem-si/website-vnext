@@ -1,0 +1,13 @@
+---
+import { metrics } from "../lib/content";
+---
+<div class="metrics-grid">
+  {
+    metrics.map((metric) => (
+      <article class="metric-card">
+        <p class="metric-value">{metric.value}</p>
+        <p class="metric-label">{metric.label}</p>
+      </article>
+    ))
+  }
+</div>

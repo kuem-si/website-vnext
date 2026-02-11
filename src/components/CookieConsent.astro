@@ -1,0 +1,21 @@
+<div class="cookie-banner" id="cookie-banner" hidden>
+  <p>
+    We use essential cookies and anonymized analytics to improve this website. By continuing, you consent to
+    this use. See our <a href="/privacy">privacy policy</a>.
+  </p>
+  <button class="btn btn-secondary" id="cookie-accept" type="button">Accept</button>
+</div>
+
+<script>
+  const key = "kuem-cookie-consent";
+  const banner = document.getElementById("cookie-banner");
+  const button = document.getElementById("cookie-accept");
+
+  if (banner && button && !localStorage.getItem(key)) {
+    banner.hidden = false;
+    button.addEventListener("click", () => {
+      localStorage.setItem(key, "accepted");
+      banner.hidden = true;
+    });
+  }
+</script>

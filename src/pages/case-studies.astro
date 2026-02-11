@@ -1,0 +1,29 @@
+---
+import MainLayout from "../layouts/MainLayout.astro";
+import CaseStudyCard from "../components/CaseStudyCard.astro";
+import CTASection from "../components/CTASection.astro";
+import { caseStudies } from "../lib/content";
+---
+<MainLayout
+  title="Case Studies | KUEM"
+  description="Utility and infrastructure IoT deployments with measurable outcomes in metering and monitoring."
+>
+  <section class="hero">
+    <div class="container">
+      <p class="eyebrow">Credibility through delivery</p>
+      <h1>Case studies with measurable operational outcomes.</h1>
+      <p>
+        Each deployment is framed around business and operational KPIs: field efficiency, data quality, service
+        reliability, and integration performance.
+      </p>
+    </div>
+  </section>
+
+  <section>
+    <div class="container grid-3">
+      {caseStudies.map((item) => <CaseStudyCard item={item} />)}
+    </div>
+  </section>
+
+  <CTASection title="Discuss a comparable deployment" description="Share your current metering or monitoring challenge and KUEM will map a realistic rollout path." />
+</MainLayout>
