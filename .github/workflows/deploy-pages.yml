@@ -36,12 +36,12 @@ jobs:
 
       - name: Prepare artifact
         run: |
-          touch dist/client/.nojekyll
+          touch dist/.nojekyll
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: ./dist/client
+          path: ./dist
 
   deploy:
     needs: build
