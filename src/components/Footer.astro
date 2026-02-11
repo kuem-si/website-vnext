@@ -1,3 +1,6 @@
+---
+import { withBase } from "../lib/paths";
+---
 <footer class="site-footer">
   <div class="container footer-grid">
     <div>
@@ -7,9 +10,9 @@
     <div>
       <h3>Focus</h3>
       <ul>
-        <li><a href="/utilities">Smart metering for utilities</a></li>
-        <li><a href="/industrial-iot">Industrial IoT projects</a></li>
-        <li><a href="/nexavia-platform">Nexavia platform</a></li>
+        <li><a href={withBase("/utilities")}>Smart metering for utilities</a></li>
+        <li><a href={withBase("/industrial-iot")}>Industrial IoT projects</a></li>
+        <li><a href={withBase("/nexavia-platform")}>Nexavia platform</a></li>
       </ul>
     </div>
     <div>
@@ -23,6 +26,6 @@
   </div>
   <div class="container footer-meta">
     <p>© {new Date().getFullYear()} KUEM. All rights reserved.</p>
-    <a href="/privacy">Privacy policy</a>
+    <a href={withBase("/privacy")}>Privacy policy</a>
   </div>
 </footer>

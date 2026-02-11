@@ -5,6 +5,7 @@ import CTASection from "../components/CTASection.astro";
 import LeadForm from "../components/LeadForm.astro";
 import CaseStudyCard from "../components/CaseStudyCard.astro";
 import { caseStudies, utilityUseCases, industrialUseCases } from "../lib/content";
+import { withBase } from "../lib/paths";
 ---
 <MainLayout
   title="KUEM | Smart Utility Metering and IoT Platform"
@@ -20,8 +21,8 @@ import { caseStudies, utilityUseCases, industrialUseCases } from "../lib/content
           non-revenue loss, improve reliability, and integrate operational data into SCADA and billing systems.
         </p>
         <div style="display:flex; gap:.75rem; margin-top:1rem; flex-wrap:wrap;">
-          <a class="btn btn-primary" href="/contact#demo-form">Request a demo</a>
-          <a class="btn btn-secondary" href="/case-studies">View case studies</a>
+          <a class="btn btn-primary" href={withBase("/contact#demo-form")}>Request a demo</a>
+          <a class="btn btn-secondary" href={withBase("/case-studies")}>View case studies</a>
         </div>
       </div>
       <aside class="panel">
@@ -49,7 +50,7 @@ import { caseStudies, utilityUseCases, industrialUseCases } from "../lib/content
           Smart water and gas metering, plus infrastructure monitoring for utility operations. Designed to integrate with
           existing SCADA, billing, and maintenance workflows.
         </p>
-        <a class="btn btn-secondary" href="/utilities">Explore utility solutions</a>
+        <a class="btn btn-secondary" href={withBase("/utilities")}>Explore utility solutions</a>
       </article>
       <article class="card">
         <p class="eyebrow">Growth segment</p>
@@ -61,7 +62,7 @@ import { caseStudies, utilityUseCases, industrialUseCases } from "../lib/content
         <ul>
           {industrialUseCases.slice(0, 4).map((item) => <li>{item}</li>)}
         </ul>
-        <a class="btn btn-secondary" href="/industrial-iot">Explore industrial IoT</a>
+        <a class="btn btn-secondary" href={withBase("/industrial-iot")}>Explore industrial IoT</a>
       </article>
     </div>
   </section>
@@ -75,7 +76,7 @@ import { caseStudies, utilityUseCases, industrialUseCases } from "../lib/content
           Device lifecycle control, multi-network connectivity, analytics, and API integrations in a single platform with
           cloud and on-prem deployment options.
         </p>
-        <a class="btn btn-secondary" href="/nexavia-platform">See the platform</a>
+        <a class="btn btn-secondary" href={withBase("/nexavia-platform")}>See the platform</a>
       </article>
       <article class="card">
         <p class="eyebrow">Scale with partners</p>
@@ -84,7 +85,7 @@ import { caseStudies, utilityUseCases, industrialUseCases } from "../lib/content
           KUEM works with system integrators and technology partners to deploy utility and infrastructure projects in the
           EU market.
         </p>
-        <a class="btn btn-secondary" href="/partner-program#partner-form">Become a partner</a>
+        <a class="btn btn-secondary" href={withBase("/partner-program#partner-form")}>Become a partner</a>
       </article>
     </div>
   </section>

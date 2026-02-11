@@ -1,7 +1,10 @@
+---
+import { withBase } from "../lib/paths";
+---
 <div class="cookie-banner" id="cookie-banner" hidden>
   <p>
     We use essential cookies and anonymized analytics to improve this website. By continuing, you consent to
-    this use. See our <a href="/privacy">privacy policy</a>.
+    this use. See our <a href={withBase("/privacy")}>privacy policy</a>.
   </p>
   <button class="btn btn-secondary" id="cookie-accept" type="button">Accept</button>
 </div>

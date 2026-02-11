@@ -1,4 +1,6 @@
 ---
+import { withBase } from "../lib/paths";
+
 const { title = "Start with a focused pilot", description = "Get a technical discovery session for your utility or industrial site.", ctaHref = "/contact#demo-form", ctaText = "Request a demo" } = Astro.props;
 ---
 <section class="cta-strip">
@@ -7,6 +9,6 @@ const { title = "Start with a focused pilot", description = "Get a technical dis
       <h2>{title}</h2>
       <p>{description}</p>
     </div>
-    <a class="btn btn-primary" href={ctaHref}>{ctaText}</a>
+    <a class="btn btn-primary" href={withBase(ctaHref)}>{ctaText}</a>
   </div>
 </section>

@@ -1,11 +1,12 @@
 ---
 import { navItems } from "../lib/content";
+import { normalizePath, withBase } from "../lib/paths";
 
-const path = Astro.url.pathname;
+const path = normalizePath(Astro.url.pathname);
 ---
 <header class="site-header">
   <div class="container header-inner">
-    <a href="/" class="brand" aria-label="KUEM home">
+    <a href={withBase("/")} class="brand" aria-label="KUEM home">
       <span class="brand-mark">K</span>
       <span class="brand-text">KUEM</span>
     </a>
@@ -14,7 +15,7 @@ const path = Astro.url.pathname;
         {
           navItems.map((item) => (
             <li>
-              <a href={item.href} aria-current={path === item.href ? "page" : undefined}>
+              <a href={withBase(item.href)} aria-current={path === normalizePath(withBase(item.href)) ? "page" : undefined}>
                 {item.label}
               </a>
             </li>
@@ -22,6 +23,6 @@ const path = Astro.url.pathname;
         }
       </ul>
     </nav>
-    <a href="/contact#demo-form" class="btn btn-primary">Request a demo</a>
+    <a href={withBase("/contact#demo-form")} class="btn btn-primary">Request a demo</a>
   </div>
 </header>

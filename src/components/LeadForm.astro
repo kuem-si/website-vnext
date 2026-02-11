@@ -7,8 +7,9 @@ const {
   formId
 } = Astro.props;
 const statusId = `${formType}-status`;
+const apiPath = `${import.meta.env.BASE_URL}api/lead`;
 ---
-<form class="lead-form" id={formId} data-lead-form data-form-type={formType} data-source-page={sourcePage}>
+<form class="lead-form" id={formId} data-lead-form data-form-type={formType} data-source-page={sourcePage} data-api-path={apiPath}>
   <h3>{heading}</h3>
   <div class="form-grid">
     <label>
@@ -60,6 +61,7 @@ const statusId = `${formType}-status`;
       const target = event.currentTarget;
       const status = target.querySelector(".form-status");
       const data = new FormData(target);
+      const apiPath = target.dataset.apiPath || "/api/lead";
 
       if (data.get("website")) {
         if (status) status.textContent = "Submission blocked.";
@@ -82,7 +84,7 @@ const statusId = `${formType}-status`;
       if (status) status.textContent = "Submitting...";
 
       try {
-        const response = await fetch("/api/lead", {
+        const response = await fetch(apiPath, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(payload)
