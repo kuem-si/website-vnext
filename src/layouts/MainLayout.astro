@@ -3,21 +3,23 @@ import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 import SeoHead from "../components/SeoHead.astro";
 import CookieConsent from "../components/CookieConsent.astro";
+import { getLocaleFromPath } from "../lib/i18n";
 import "../styles/global.css";
 
 const { title, description, pathname = Astro.url.pathname } = Astro.props;
+const locale = getLocaleFromPath(pathname);
 ---
 <!doctype html>
-<html lang="en">
+<html lang={locale}>
   <head>
     <SeoHead title={title} description={description} pathname={pathname} />
   </head>
   <body>
-    <Header />
+    <Header locale={locale} />
     <main>
       <slot />
     </main>
-    <Footer />
-    <CookieConsent />
+    <Footer locale={locale} />
+    <CookieConsent locale={locale} />
   </body>
 </html>

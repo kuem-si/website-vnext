@@ -1,56 +1,89 @@
 ---
+import type { Locale } from "../lib/i18n";
+
 const {
   formType = "demo",
   heading = "Request a demo",
   submitLabel = "Submit request",
   sourcePage = "unknown",
-  formId
+  formId,
+  locale = "en"
 } = Astro.props;
 const statusId = `${formType}-status`;
 const apiPath = `${import.meta.env.BASE_URL}api/lead`;
+const copy =
+  locale === "sl"
+    ? {
+        fullName: "Polno ime",
+        company: "Podjetje",
+        role: "Vloga",
+        workEmail: "E-posta za delo",
+        phone: "Telefon",
+        country: "Drzava",
+        message: "Sporocilo",
+        consent: "Soglasam, da KUEM hrani moje podatke za odgovor na povprasevanje v skladu z GDPR.",
+        blocked: "Oddaja je blokirana.",
+        submitting: "Posiljanje...",
+        success: "Hvala. Kmalu vas bomo kontaktirali.",
+        failed: "Oddaja ni uspela. Prosimo, pisite na info@kuem.eu."
+      }
+    : {
+        fullName: "Full name",
+        company: "Company",
+        role: "Role",
+        workEmail: "Work email",
+        phone: "Phone",
+        country: "Country",
+        message: "Message",
+        consent: "I consent to KUEM storing my data to respond to this inquiry in line with GDPR.",
+        blocked: "Submission blocked.",
+        submitting: "Submitting...",
+        success: "Thank you. We will contact you shortly.",
+        failed: "We could not submit the form. Please email info@kuem.eu."
+      };
 ---
 <form class="lead-form" id={formId} data-lead-form data-form-type={formType} data-source-page={sourcePage} data-api-path={apiPath}>
   <h3>{heading}</h3>
   <div class="form-grid">
     <label>
-      Full name
+      {copy.fullName}
       <input type="text" name="fullName" required autocomplete="name" />
     </label>
     <label>
-      Company
+      {copy.company}
       <input type="text" name="company" required autocomplete="organization" />
     </label>
     <label>
-      Role
+      {copy.role}
       <input type="text" name="role" required autocomplete="organization-title" />
     </label>
     <label>
-      Work email
+      {copy.workEmail}
       <input type="email" name="email" required autocomplete="email" />
     </label>
     <label>
-      Phone
+      {copy.phone}
       <input type="tel" name="phone" autocomplete="tel" />
     </label>
     <label>
-      Country
+      {copy.country}
       <input type="text" name="country" autocomplete="country-name" />
     </label>
   </div>
   <label>
-    Message
+    {copy.message}
     <textarea name="message" rows="5" required></textarea>
   </label>
   <input type="text" name="website" tabindex="-1" autocomplete="off" class="hp-field" aria-hidden="true" />
   <label class="consent-check">
     <input type="checkbox" name="consent" value="yes" required />
-    I consent to KUEM storing my data to respond to this inquiry in line with GDPR.
+    {copy.consent}
   </label>
   <button class="btn btn-primary" type="submit">{submitLabel}</button>
   <p id={statusId} class="form-status" role="status" aria-live="polite"></p>
 </form>
 
-<script>
+<script define:vars={{ copy }}>
   const forms = document.querySelectorAll("[data-lead-form]");
 
   forms.forEach((form) => {
@@ -64,7 +97,7 @@ const apiPath = `${import.meta.env.BASE_URL}api/lead`;
       const apiPath = target.dataset.apiPath || "/api/lead";
 
       if (data.get("website")) {
-        if (status) status.textContent = "Submission blocked.";
+        if (status) status.textContent = copy.blocked;
         return;
       }
 
@@ -81,7 +114,7 @@ const apiPath = `${import.meta.env.BASE_URL}api/lead`;
         consent: data.get("consent") === "yes"
       };
 
-      if (status) status.textContent = "Submitting...";
+      if (status) status.textContent = copy.submitting;
 
       try {
         const response = await fetch(apiPath, {
@@ -96,10 +129,10 @@ const apiPath = `${import.meta.env.BASE_URL}api/lead`;
           throw new Error(result.error || "Request failed");
         }
 
-        if (status) status.textContent = "Thank you. We will contact you shortly.";
+        if (status) status.textContent = copy.success;
         target.reset();
       } catch (error) {
-        if (status) status.textContent = "We could not submit the form. Please email info@kuem.eu.";
+        if (status) status.textContent = copy.failed;
       }
     });
   });

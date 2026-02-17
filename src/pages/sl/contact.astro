@@ -1,0 +1,49 @@
+﻿---
+import MainLayout from "../../layouts/MainLayout.astro";
+import LeadForm from "../../components/LeadForm.astro";
+---
+<MainLayout
+  title="Kontakt KUEM"
+  description="Zahtevajte komunalni IoT demo ali oddajte partnersko povprasevanje. KUEM povezuje obrazce z Odoo CRM."
+>
+  <section class="hero">
+    <div class="container">
+      <p class="eyebrow">Kontakt</p>
+      <h1>Govorite s KUEM o prioritetah vase uvedbe.</h1>
+      <p>
+        Uporabite spodnja obrazca za zahteve po demo predstavitvi in partnerska povprasevanja. Oddaje se obdelujejo prek
+        GDPR skladnih obrazcev in se lahko posredujejo v Odoo CRM.
+      </p>
+    </div>
+  </section>
+
+  <section>
+    <div class="container split">
+      <LeadForm
+        locale="sl"
+        formId="demo-form"
+        heading="Zahteva za demo"
+        submitLabel="Poslji zahtevo"
+        sourcePage="contact-sl"
+      />
+      <LeadForm
+        locale="sl"
+        formType="partner"
+        formId="partner-form"
+        heading="Partnersko povprasevanje"
+        submitLabel="Poslji povprasevanje"
+        sourcePage="contact-sl"
+      />
+    </div>
+  </section>
+
+  <section>
+    <div class="container card">
+      <h2>Neposreden kontakt</h2>
+      <p>E-posta: <a href="mailto:info@kuem.eu">info@kuem.eu</a></p>
+      <p>Telefon: <a href="tel:+32000000000">+32 000 00 00 00</a></p>
+      <p>Naslov: Brussels, Belgium</p>
+    </div>
+  </section>
+</MainLayout>
+

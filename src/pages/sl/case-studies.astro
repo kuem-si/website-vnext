@@ -1,0 +1,37 @@
+﻿---
+import MainLayout from "../../layouts/MainLayout.astro";
+import CaseStudyCard from "../../components/CaseStudyCard.astro";
+import CTASection from "../../components/CTASection.astro";
+import { getCaseStudies } from "../../lib/content";
+
+const caseStudies = getCaseStudies("sl");
+---
+<MainLayout
+  title="Primeri projektov | KUEM"
+  description="Komunalne in infrastrukturne IoT uvedbe z merljivimi rezultati pri merjenju in nadzoru."
+>
+  <section class="hero">
+    <div class="container">
+      <p class="eyebrow">Verodostojnost skozi izvedbo</p>
+      <h1>Primeri projektov z merljivimi operativnimi rezultati.</h1>
+      <p>
+        Vsaka uvedba je zastavljena okoli poslovnih in operativnih KPI-jev: ucinkovitost terena, kakovost podatkov,
+        zanesljivost storitve in ucinkovitost integracije.
+      </p>
+    </div>
+  </section>
+
+  <section>
+    <div class="container grid-3">
+      {caseStudies.map((item) => <CaseStudyCard item={item} locale="sl" />)}
+    </div>
+  </section>
+
+  <CTASection
+    title="Pogovor o primerljivi uvedbi"
+    description="Delite svoj trenutni izziv merjenja ali nadzora in KUEM bo pripravil realno pot uvajanja."
+    ctaHref="/sl/contact#demo-form"
+    ctaText="Zahtevaj demo"
+  />
+</MainLayout>
+

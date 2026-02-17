@@ -1,14 +1,15 @@
 ---
 import type { CaseStudy } from "../lib/content";
+import type { Locale } from "../lib/i18n";
 
-const { item } = Astro.props as { item: CaseStudy };
+const { item, locale = "en" } = Astro.props as { item: CaseStudy; locale?: Locale };
 ---
 <article class="card">
   <p class="eyebrow">{item.vertical}</p>
   <h3>{item.title}</h3>
-  <p><strong>Challenge:</strong> {item.challenge}</p>
-  <p><strong>Solution:</strong> {item.solution}</p>
-  <p><strong>Deployment:</strong> {item.deployment}</p>
+  <p><strong>{locale === "sl" ? "Izziv:" : "Challenge:"}</strong> {item.challenge}</p>
+  <p><strong>{locale === "sl" ? "Resitev:" : "Solution:"}</strong> {item.solution}</p>
+  <p><strong>{locale === "sl" ? "Uvedba:" : "Deployment:"}</strong> {item.deployment}</p>
   <ul>
     {item.results.map((result) => <li>{result}</li>)}
   </ul>

@@ -1,5 +1,9 @@
 ---
-import { metrics } from "../lib/content";
+import type { Locale } from "../lib/i18n";
+import { getMetrics } from "../lib/content";
+
+const { locale = "en" } = Astro.props as { locale?: Locale };
+const metrics = getMetrics(locale);
 ---
 <div class="metrics-grid">
   {

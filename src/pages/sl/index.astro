@@ -1,0 +1,132 @@
+﻿---
+import MainLayout from "../../layouts/MainLayout.astro";
+import Metrics from "../../components/Metrics.astro";
+import CTASection from "../../components/CTASection.astro";
+import LeadForm from "../../components/LeadForm.astro";
+import CaseStudyCard from "../../components/CaseStudyCard.astro";
+import { getCaseStudies, getUtilityUseCases, getIndustrialUseCases } from "../../lib/content";
+import { withBase } from "../../lib/paths";
+
+const caseStudies = getCaseStudies("sl");
+const utilityUseCases = getUtilityUseCases("sl");
+const industrialUseCases = getIndustrialUseCases("sl");
+---
+<MainLayout
+  title="KUEM | Pametno komunalno merjenje in IoT platforma"
+  description="KUEM pomaga vodovodom in plinarjem zmanjsati izgube, izboljsati zanesljivost ter povezati telemetrijo s SCADA in obracunskimi sistemi."
+>
+  <section class="hero">
+    <div class="container hero-grid">
+      <div>
+        <p class="eyebrow">IoT resitve za komunalo in infrastrukturo</p>
+        <h1>Pametno merjenje in operativni IoT z merljivim poslovnim ucinkom.</h1>
+        <p>
+          KUEM izvaja komunalne IoT projekte na platformi Nexavia. Pomagamo vodnim in plinskim operaterjem zmanjsati
+          izgube, povecati zanesljivost in povezati operativne podatke s SCADA ter obracunskimi sistemi.
+        </p>
+        <div style="display:flex; gap:.75rem; margin-top:1rem; flex-wrap:wrap;">
+          <a class="btn btn-primary" href={withBase("/sl/contact#demo-form")}>Zahtevaj demo</a>
+          <a class="btn btn-secondary" href={withBase("/sl/case-studies")}>Poglej primere</a>
+        </div>
+      </div>
+      <aside class="panel">
+        <h2>Zakaj komunalna podjetja izberejo KUEM</h2>
+        <ul>
+          {utilityUseCases.slice(0, 5).map((item) => <li>{item}</li>)}
+        </ul>
+      </aside>
+    </div>
+  </section>
+
+  <section>
+    <div class="container">
+      <h2>Dokazan obseg uvedb</h2>
+      <Metrics locale="sl" />
+    </div>
+  </section>
+
+  <section>
+    <div class="container split">
+      <article class="card">
+        <p class="eyebrow">Glavno podrocje</p>
+        <h2>Resitve za komunalo</h2>
+        <p>
+          Pametno merjenje vode in plina ter nadzor infrastrukture za komunalne procese. Zasnovano za integracijo z
+          obstojecimi SCADA, obracunskimi in vzdrzevalnimi poteki.
+        </p>
+        <a class="btn btn-secondary" href={withBase("/sl/utilities")}>Razisci komunalne resitve</a>
+      </article>
+      <article class="card">
+        <p class="eyebrow">Rastoci segment</p>
+        <h2>Industrijski IoT</h2>
+        <p>
+          Operativni nadzor za industrijske ekipe: temperatura, energija, okoljski senzorji in sledenje sredstvom za
+          vecjo ucinkovitost in manj izpadov.
+        </p>
+        <ul>
+          {industrialUseCases.slice(0, 4).map((item) => <li>{item}</li>)}
+        </ul>
+        <a class="btn btn-secondary" href={withBase("/sl/industrial-iot")}>Razisci industrijski IoT</a>
+      </article>
+    </div>
+  </section>
+
+  <section>
+    <div class="container split">
+      <article class="card">
+        <p class="eyebrow">Platforma</p>
+        <h2>Nexavia</h2>
+        <p>
+          Upravljanje zivljenjskega cikla naprav, vec omrezij, analitika in API integracije v eni platformi z moznostjo
+          oblacne ali lokalne namestitve.
+        </p>
+        <a class="btn btn-secondary" href={withBase("/sl/nexavia-platform")}>Poglej platformo</a>
+      </article>
+      <article class="card">
+        <p class="eyebrow">Skupaj s partnerji</p>
+        <h2>Partnerski program</h2>
+        <p>
+          KUEM sodeluje s sistemskimi integratorji in tehnoloskimi partnerji pri uvedbi komunalnih in infrastrukturnih
+          projektov na trgu EU.
+        </p>
+        <a class="btn btn-secondary" href={withBase("/sl/partner-program#partner-form")}>Postani partner</a>
+      </article>
+    </div>
+  </section>
+
+  <section>
+    <div class="container">
+      <h2>Izbrane uvedbe</h2>
+      <div class="grid-3">
+        {caseStudies.map((item) => <CaseStudyCard item={item} locale="sl" />)}
+      </div>
+    </div>
+  </section>
+
+  <CTASection
+    title="Zacnite s ciljno usmerjenim pilotom"
+    description="Rezervirajte tehnicni uvodni sestanek za vas komunalni ali industrijski objekt."
+    ctaHref="/sl/contact#demo-form"
+    ctaText="Zahtevaj demo"
+  />
+
+  <section>
+    <div class="container split" id="demo-form">
+      <div>
+        <p class="eyebrow">Hiter naslednji korak</p>
+        <h2>Rezervirajte demo za komunalo</h2>
+        <p>
+          Delite svoje operativne cilje in integracijsko okolje. KUEM bo predlagal pragmaticen pilotni obseg, casovnico
+          in pot integracije.
+        </p>
+      </div>
+      <LeadForm
+        locale="sl"
+        heading="Zahteva za demo"
+        submitLabel="Poslji zahtevo"
+        sourcePage="homepage-sl"
+      />
+    </div>
+  </section>
+</MainLayout>
+

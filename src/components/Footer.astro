@@ -1,22 +1,42 @@
----
+﻿---
+import type { Locale } from "../lib/i18n";
+import { withLocale } from "../lib/i18n";
 import { withBase } from "../lib/paths";
+
+const { locale = "en" } = Astro.props as { locale?: Locale };
 ---
 <footer class="site-footer">
   <div class="container footer-grid">
     <div>
       <h3>KUEM</h3>
-      <p>IoT solutions company specialized in utilities and infrastructure digitalization.</p>
+      <p>
+        {locale === "sl"
+          ? "Podjetje za IoT resitve, specializirano za digitalizacijo komunalnih in infrastrukturnih sistemov."
+          : "IoT solutions company specialized in utilities and infrastructure digitalization."}
+      </p>
     </div>
     <div>
-      <h3>Focus</h3>
+      <h3>{locale === "sl" ? "Podrocja" : "Focus"}</h3>
       <ul>
-        <li><a href={withBase("/utilities")}>Smart metering for utilities</a></li>
-        <li><a href={withBase("/industrial-iot")}>Industrial IoT projects</a></li>
-        <li><a href={withBase("/nexavia-platform")}>Nexavia platform</a></li>
+        <li>
+          <a href={withBase(withLocale("/utilities", locale))}>
+            {locale === "sl" ? "Pametno merjenje za komunalo" : "Smart metering for utilities"}
+          </a>
+        </li>
+        <li>
+          <a href={withBase(withLocale("/industrial-iot", locale))}>
+            {locale === "sl" ? "Industrijski IoT projekti" : "Industrial IoT projects"}
+          </a>
+        </li>
+        <li>
+          <a href={withBase(withLocale("/nexavia-platform", locale))}>
+            {locale === "sl" ? "Platforma Nexavia" : "Nexavia platform"}
+          </a>
+        </li>
       </ul>
     </div>
     <div>
-      <h3>Contact</h3>
+      <h3>{locale === "sl" ? "Kontakt" : "Contact"}</h3>
       <ul>
         <li><a href="mailto:info@kuem.eu">info@kuem.eu</a></li>
         <li><a href="tel:+32000000000">+32 000 00 00 00</a></li>
@@ -25,7 +45,11 @@ import { withBase } from "../lib/paths";
     </div>
   </div>
   <div class="container footer-meta">
-    <p>© {new Date().getFullYear()} KUEM. All rights reserved.</p>
-    <a href={withBase("/privacy")}>Privacy policy</a>
+    <p>
+      &copy; {new Date().getFullYear()} KUEM.
+      {locale === "sl" ? " Vse pravice pridrzane." : " All rights reserved."}
+    </p>
+    <a href={withBase(withLocale("/privacy", locale))}>{locale === "sl" ? "Politika zasebnosti" : "Privacy policy"}</a>
   </div>
 </footer>
+

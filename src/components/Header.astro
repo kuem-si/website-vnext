@@ -1,28 +1,80 @@
 ---
-import { navItems } from "../lib/content";
+import type { Locale } from "../lib/i18n";
+import { getNavItems } from "../lib/content";
+import { toggleLocale, withLocale } from "../lib/i18n";
 import { normalizePath, withBase } from "../lib/paths";
 
+const { locale = "en" } = Astro.props as { locale?: Locale };
 const path = normalizePath(Astro.url.pathname);
+const otherLocalePath = toggleLocale(path);
+const navItems = getNavItems(locale);
+const homeHref = withLocale("/", locale);
+const contactHref = withLocale("/contact#demo-form", locale);
 ---
 <header class="site-header">
   <div class="container header-inner">
-    <a href={withBase("/")} class="brand" aria-label="KUEM home">
+    <a href={withBase(homeHref)} class="brand" aria-label={locale === "sl" ? "KUEM domov" : "KUEM home"}>
       <span class="brand-mark">K</span>
       <span class="brand-text">KUEM</span>
     </a>
-    <nav aria-label="Main navigation">
+    <button
+      class="menu-toggle"
+      type="button"
+      aria-expanded="false"
+      aria-controls="main-nav"
+      aria-label={locale === "sl" ? "Odpri meni" : "Open menu"}
+      data-menu-toggle
+    >
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+    <nav id="main-nav" class="main-nav" aria-label={locale === "sl" ? "Glavna navigacija" : "Main navigation"}>
       <ul class="nav-list">
         {
           navItems.map((item) => (
             <li>
-              <a href={withBase(item.href)} aria-current={path === normalizePath(withBase(item.href)) ? "page" : undefined}>
+              <a
+                href={withBase(withLocale(item.href, locale))}
+                aria-current={path === normalizePath(withBase(withLocale(item.href, locale))) ? "page" : undefined}
+              >
                 {item.label}
               </a>
             </li>
           ))
         }
+        <li class="mobile-only">
+          <a href={withBase(contactHref)}>{locale === "sl" ? "Zahtevaj demo" : "Request a demo"}</a>
+        </li>
       </ul>
     </nav>
-    <a href={withBase("/contact#demo-form")} class="btn btn-primary">Request a demo</a>
+    <div class="header-actions">
+      <a href={withBase(otherLocalePath)} class="btn btn-secondary">{locale === "sl" ? "EN" : "SL"}</a>
+      <a href={withBase(contactHref)} class="btn btn-primary">{locale === "sl" ? "Zahtevaj demo" : "Request a demo"}</a>
+    </div>
   </div>
 </header>
+
+<script>
+  const headers = document.querySelectorAll(".site-header");
+
+  headers.forEach((header) => {
+    const toggle = header.querySelector("[data-menu-toggle]");
+    const nav = header.querySelector(".main-nav");
+    if (!toggle || !nav) return;
+
+    const setExpanded = (expanded) => {
+      toggle.setAttribute("aria-expanded", expanded ? "true" : "false");
+      header.classList.toggle("is-menu-open", expanded);
+    };
+
+    toggle.addEventListener("click", () => {
+      const expanded = toggle.getAttribute("aria-expanded") === "true";
+      setExpanded(!expanded);
+    });
+
+    nav.querySelectorAll("a").forEach((link) => {
+      link.addEventListener("click", () => setExpanded(false));
+    });
+  });
+</script>
