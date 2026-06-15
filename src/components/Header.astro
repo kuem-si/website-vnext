@@ -49,6 +49,15 @@ const contactHref = withLocale("/contact#demo-form", locale);
       </ul>
     </nav>
     <div class="header-actions">
+      <button
+        type="button"
+        class="btn btn-secondary theme-toggle"
+        data-theme-toggle
+        data-light-label={locale === "sl" ? "Svetla" : "Light"}
+        data-dark-label={locale === "sl" ? "Temna" : "Dark"}
+      >
+        {locale === "sl" ? "Temna" : "Dark"}
+      </button>
       <a href={withBase(otherLocalePath)} class="btn btn-secondary">{locale === "sl" ? "EN" : "SL"}</a>
       <a href={withBase(contactHref)} class="btn btn-primary">{locale === "sl" ? "Zahtevaj demo" : "Request a demo"}</a>
     </div>
@@ -57,6 +66,29 @@ const contactHref = withLocale("/contact#demo-form", locale);
 
 <script>
   const headers = document.querySelectorAll(".site-header");
+  const themeButtons = document.querySelectorAll("[data-theme-toggle]");
+  const themeKey = "kuem-theme";
+
+  const applyTheme = (theme) => {
+    const safeTheme = theme === "light" ? "light" : "dark";
+    document.documentElement.dataset.theme = safeTheme;
+    localStorage.setItem(themeKey, safeTheme);
+    themeButtons.forEach((button) => {
+      const lightLabel = button.dataset.lightLabel || "Light";
+      const darkLabel = button.dataset.darkLabel || "Dark";
+      button.textContent = safeTheme === "light" ? lightLabel : darkLabel;
+    });
+  };
+
+  const currentTheme = document.documentElement.dataset.theme === "light" ? "light" : "dark";
+  applyTheme(currentTheme);
+
+  themeButtons.forEach((button) => {
+    button.addEventListener("click", () => {
+      const nextTheme = document.documentElement.dataset.theme === "light" ? "dark" : "light";
+      applyTheme(nextTheme);
+    });
+  });
 
   headers.forEach((header) => {
     const toggle = header.querySelector("[data-menu-toggle]");

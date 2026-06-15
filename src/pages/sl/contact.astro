@@ -4,34 +4,26 @@ import LeadForm from "../../components/LeadForm.astro";
 ---
 <MainLayout
   title="Kontakt KUEM"
-  description="Zahtevajte komunalni IoT demo ali oddajte partnersko povprasevanje. KUEM povezuje obrazce z Odoo CRM."
+  description="Oddajte eno kontaktno povprasevanje za partnerstvo, demo, povprasevanje ali custom zadevo."
 >
   <section class="hero">
     <div class="container">
       <p class="eyebrow">Kontakt</p>
       <h1>Govorite s KUEM o prioritetah vase uvedbe.</h1>
       <p>
-        Uporabite spodnja obrazca za zahteve po demo predstavitvi in partnerska povprasevanja. Oddaje se obdelujejo prek
-        GDPR skladnih obrazcev in se lahko posredujejo v Odoo CRM.
+        Uporabite spodnji obrazec za partnerstvo, demo, povprasevanje ali custom zadevo. Oddaje se obdelujejo prek GDPR
+        skladnih obrazcev in se lahko posredujejo v Odoo CRM.
       </p>
     </div>
   </section>
 
   <section>
-    <div class="container split">
+    <div class="container">
       <LeadForm
         locale="sl"
         formId="demo-form"
-        heading="Zahteva za demo"
+        heading="Kontaktni obrazec"
         submitLabel="Poslji zahtevo"
-        sourcePage="contact-sl"
-      />
-      <LeadForm
-        locale="sl"
-        formType="partner"
-        formId="partner-form"
-        heading="Partnersko povprasevanje"
-        submitLabel="Poslji povprasevanje"
         sourcePage="contact-sl"
       />
     </div>
@@ -41,8 +33,8 @@ import LeadForm from "../../components/LeadForm.astro";
     <div class="container card">
       <h2>Neposreden kontakt</h2>
       <p>E-posta: <a href="mailto:info@kuem.eu">info@kuem.eu</a></p>
-      <p>Telefon: <a href="tel:+32000000000">+32 000 00 00 00</a></p>
-      <p>Naslov: Brussels, Belgium</p>
+      <p>Telefon: <a href="tel:+38659013416">0038659013416</a></p>
+      <p>Naslov: Ljubljanska cesta 24g, 4000 Kranj, Slovenia</p>
     </div>
   </section>
 </MainLayout>

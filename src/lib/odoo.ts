@@ -1,10 +1,9 @@
 export type LeadPayload = {
-  leadType: "demo" | "partner";
-  fullName: string;
-  company: string;
-  role: string;
+  firstName: string;
+  lastName: string;
   email: string;
-  phone?: string;
+  subject: "partnership" | "demo" | "inquiry" | "custom";
+  customSubject?: string;
   country?: string;
   message: string;
   consent: boolean;
@@ -98,17 +97,23 @@ export async function createOdooLead(payload: LeadPayload): Promise<number> {
   }
 
   const uid = await authenticate(config);
-  const leadNamePrefix = payload.leadType === "partner" ? "Partner Inquiry" : "Demo Request";
+  const subjectLabels: Record<LeadPayload["subject"], string> = {
+    partnership: "Partnership",
+    demo: "Demo",
+    inquiry: "Inquiry",
+    custom: payload.customSubject?.trim() || "Custom"
+  };
+  const fullName = `${payload.firstName} ${payload.lastName}`.trim();
+  const leadLabel = subjectLabels[payload.subject];
 
   const leadValues = {
-    name: `${leadNamePrefix} - ${payload.company}`,
-    contact_name: payload.fullName,
-    function: payload.role,
+    name: `${leadLabel} - ${fullName}`,
+    contact_name: fullName,
     email_from: payload.email,
-    phone: payload.phone || "",
-    partner_name: payload.company,
+    phone: "",
+    partner_name: "",
     description: [
-      `Lead Type: ${payload.leadType}`,
+      `Subject: ${leadLabel}`,
       payload.country ? `Country: ${payload.country}` : "",
       payload.sourcePage ? `Source Page: ${payload.sourcePage}` : "",
       "",

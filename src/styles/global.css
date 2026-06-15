@@ -13,6 +13,39 @@
   --radius: 16px;
   --container: 1160px;
   --shadow: 0 12px 30px rgba(0, 0, 0, 0.35);
+  --bg-gradient-start: #0a111d;
+  --bg-gradient-end: #070d16;
+  --header-bg: rgba(10, 17, 29, 0.9);
+  --nav-hover-bg: #1a2a42;
+  --cta-gradient-start: #122440;
+  --cta-gradient-end: #1a3151;
+  --cta-border: #33527b;
+  --footer-bg: #0b1321;
+  --primary-text: #07101d;
+  --scheme: dark;
+}
+
+html[data-theme="light"] {
+  --bg: #f5f8fc;
+  --surface: #ffffff;
+  --surface-muted: #eaf1fb;
+  --text: #0f1c2e;
+  --text-soft: #415068;
+  --primary: #1057b7;
+  --primary-strong: #0a3f87;
+  --border: #cfe0f8;
+  --ok: #006a4e;
+  --shadow: 0 12px 30px rgba(16, 87, 183, 0.08);
+  --bg-gradient-start: #f6f9ff;
+  --bg-gradient-end: #f3f7fc;
+  --header-bg: rgba(246, 249, 255, 0.9);
+  --nav-hover-bg: #eaf2ff;
+  --cta-gradient-start: #e8f1ff;
+  --cta-gradient-end: #dce9fb;
+  --cta-border: #c4d9fb;
+  --footer-bg: #eef4fd;
+  --primary-text: #ffffff;
+  --scheme: light;
 }
 
 * {
@@ -25,8 +58,8 @@ body {
   padding: 0;
   font-family: "IBM Plex Sans", "Segoe UI", sans-serif;
   color: var(--text);
-  background: linear-gradient(180deg, #0a111d 0%, #070d16 100%);
-  color-scheme: dark;
+  background: linear-gradient(180deg, var(--bg-gradient-start) 0%, var(--bg-gradient-end) 100%);
+  color-scheme: var(--scheme);
 }
 
 a {
@@ -61,7 +94,7 @@ section {
   top: 0;
   z-index: 20;
   backdrop-filter: blur(10px);
-  background: rgba(10, 17, 29, 0.9);
+  background: var(--header-bg);
   border-bottom: 1px solid var(--border);
 }
 
@@ -158,7 +191,7 @@ section {
 .nav-list a[aria-current="page"],
 .nav-list a:hover {
   color: var(--primary-strong);
-  background: #1a2a42;
+  background: var(--nav-hover-bg);
 }
 
 .btn {
@@ -174,7 +207,7 @@ section {
 
 .btn-primary {
   background: var(--primary);
-  color: #07101d;
+  color: var(--primary-text);
 }
 
 .btn-primary:hover {
@@ -287,8 +320,8 @@ section {
 
 .cta-inner {
   border-radius: var(--radius);
-  background: linear-gradient(120deg, #122440 0%, #1a3151 100%);
-  border: 1px solid #33527b;
+  background: linear-gradient(120deg, var(--cta-gradient-start) 0%, var(--cta-gradient-end) 100%);
+  border: 1px solid var(--cta-border);
   padding: 1.8rem;
   display: flex;
   align-items: center;
@@ -318,6 +351,7 @@ label {
 }
 
 input,
+select,
 textarea {
   width: 100%;
   border: 1px solid var(--border);
@@ -362,7 +396,7 @@ textarea {
   margin-top: 4rem;
   padding: 2.8rem 0 1.8rem;
   border-top: 1px solid var(--border);
-  background: #0b1321;
+  background: var(--footer-bg);
 }
 
 .footer-grid {

@@ -1,75 +1,97 @@
 ---
 import type { Locale } from "../lib/i18n";
+import { countries } from "../lib/countries";
 
 const {
-  formType = "demo",
-  heading = "Request a demo",
-  submitLabel = "Submit request",
+  heading = "Contact us",
+  submitLabel = "Send request",
   sourcePage = "unknown",
   formId,
   locale = "en"
 } = Astro.props;
-const statusId = `${formType}-status`;
+const statusId = `${formId || "lead"}-status`;
+const countryListId = `${formId || "lead"}-countries`;
 const apiPath = `${import.meta.env.BASE_URL}api/lead`;
 const copy =
   locale === "sl"
     ? {
-        fullName: "Polno ime",
-        company: "Podjetje",
-        role: "Vloga",
-        workEmail: "E-posta za delo",
-        phone: "Telefon",
+        firstName: "Ime",
+        lastName: "Priimek",
+        email: "E-posta",
+        subject: "Zadeva",
+        customSubject: "Custom zadeva",
         country: "Drzava",
         message: "Sporocilo",
         consent: "Soglasam, da KUEM hrani moje podatke za odgovor na povprasevanje v skladu z GDPR.",
+        subjectPlaceholder: "Izberi zadevo",
+        subjectPartnership: "Partnerstvo",
+        subjectDemo: "Demo",
+        subjectInquiry: "Povprasevanje",
+        subjectCustom: "Custom",
         blocked: "Oddaja je blokirana.",
         submitting: "Posiljanje...",
         success: "Hvala. Kmalu vas bomo kontaktirali.",
-        failed: "Oddaja ni uspela. Prosimo, pisite na info@kuem.eu."
+        failed: "Oddaja ni uspela. Prosimo, pisite na info@kuem.eu.",
+        customRequired: "Vnesite custom zadevo."
       }
     : {
-        fullName: "Full name",
-        company: "Company",
-        role: "Role",
-        workEmail: "Work email",
-        phone: "Phone",
+        firstName: "First name",
+        lastName: "Last name",
+        email: "Email",
+        subject: "Subject",
+        customSubject: "Custom subject",
         country: "Country",
         message: "Message",
         consent: "I consent to KUEM storing my data to respond to this inquiry in line with GDPR.",
+        subjectPlaceholder: "Select subject",
+        subjectPartnership: "Partnership",
+        subjectDemo: "Demo",
+        subjectInquiry: "Inquiry",
+        subjectCustom: "Custom",
         blocked: "Submission blocked.",
         submitting: "Submitting...",
         success: "Thank you. We will contact you shortly.",
-        failed: "We could not submit the form. Please email info@kuem.eu."
+        failed: "We could not submit the form. Please email info@kuem.eu.",
+        customRequired: "Please provide a custom subject."
       };
 ---
-<form class="lead-form" id={formId} data-lead-form data-form-type={formType} data-source-page={sourcePage} data-api-path={apiPath}>
+<form class="lead-form" id={formId} data-lead-form data-source-page={sourcePage} data-api-path={apiPath}>
   <h3>{heading}</h3>
   <div class="form-grid">
     <label>
-      {copy.fullName}
-      <input type="text" name="fullName" required autocomplete="name" />
+      {copy.firstName}
+      <input type="text" name="firstName" required autocomplete="given-name" />
     </label>
     <label>
-      {copy.company}
-      <input type="text" name="company" required autocomplete="organization" />
+      {copy.lastName}
+      <input type="text" name="lastName" required autocomplete="family-name" />
     </label>
     <label>
-      {copy.role}
-      <input type="text" name="role" required autocomplete="organization-title" />
-    </label>
-    <label>
-      {copy.workEmail}
+      {copy.email}
       <input type="email" name="email" required autocomplete="email" />
     </label>
     <label>
-      {copy.phone}
-      <input type="tel" name="phone" autocomplete="tel" />
+      {copy.subject}
+      <select name="subject" required>
+        <option value="" selected disabled>{copy.subjectPlaceholder}</option>
+        <option value="partnership">{copy.subjectPartnership}</option>
+        <option value="demo">{copy.subjectDemo}</option>
+        <option value="inquiry">{copy.subjectInquiry}</option>
+        <option value="custom">{copy.subjectCustom}</option>
+      </select>
+    </label>
+    <label>
+      {copy.customSubject}
+      <input type="text" name="customSubject" autocomplete="off" disabled />
     </label>
     <label>
       {copy.country}
-      <input type="text" name="country" autocomplete="country-name" />
+      <input type="text" name="country" autocomplete="country-name" list={countryListId} />
     </label>
   </div>
+  <datalist id={countryListId}>
+    {countries.map((country) => <option value={country} />)}
+  </datalist>
   <label>
     {copy.message}
     <textarea name="message" rows="5" required></textarea>
@@ -95,20 +117,26 @@ const copy =
       const status = target.querySelector(".form-status");
       const data = new FormData(target);
       const apiPath = target.dataset.apiPath || "/api/lead";
+      const subject = String(data.get("subject") || "");
+      const customSubject = String(data.get("customSubject") || "").trim();
 
       if (data.get("website")) {
         if (status) status.textContent = copy.blocked;
         return;
       }
 
+      if (subject === "custom" && !customSubject) {
+        if (status) status.textContent = copy.customRequired;
+        return;
+      }
+
       const payload = {
-        leadType: target.dataset.formType,
         sourcePage: target.dataset.sourcePage,
-        fullName: String(data.get("fullName") || ""),
-        company: String(data.get("company") || ""),
-        role: String(data.get("role") || ""),
+        firstName: String(data.get("firstName") || ""),
+        lastName: String(data.get("lastName") || ""),
         email: String(data.get("email") || ""),
-        phone: String(data.get("phone") || ""),
+        subject,
+        customSubject,
         country: String(data.get("country") || ""),
         message: String(data.get("message") || ""),
         consent: data.get("consent") === "yes"
@@ -135,5 +163,19 @@ const copy =
         if (status) status.textContent = copy.failed;
       }
     });
+
+    const subjectField = form.querySelector('select[name="subject"]');
+    const customSubjectField = form.querySelector('input[name="customSubject"]');
+    const syncCustomSubjectState = () => {
+      if (!subjectField || !customSubjectField) return;
+      const isCustom = subjectField.value === "custom";
+      customSubjectField.disabled = !isCustom;
+      customSubjectField.required = isCustom;
+      if (!isCustom) customSubjectField.value = "";
+    };
+    if (subjectField && customSubjectField) {
+      subjectField.addEventListener("change", syncCustomSubjectState);
+      syncCustomSubjectState();
+    }
   });
 </script>

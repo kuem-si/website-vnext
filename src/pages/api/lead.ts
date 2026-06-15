@@ -13,15 +13,24 @@ function badRequest(message: string) {
 export const POST: APIRoute = async ({ request }) => {
   try {
     const body = await request.json();
-    const leadType = body.leadType === "partner" ? "partner" : "demo";
+    const subject = typeof body.subject === "string" ? body.subject.trim().toLowerCase() : "";
 
     if (!body.consent) return badRequest("Consent is required.");
 
-    const requiredFields = ["fullName", "company", "role", "email", "message"];
+    const requiredFields = ["firstName", "lastName", "email", "message"];
     for (const key of requiredFields) {
       if (typeof body[key] !== "string" || !body[key].trim()) {
         return badRequest(`Missing required field: ${key}`);
       }
+    }
+
+    if (!["partnership", "demo", "inquiry", "custom"].includes(subject)) {
+      return badRequest("Missing or invalid required field: subject");
+    }
+
+    const customSubject = typeof body.customSubject === "string" ? body.customSubject.trim() : "";
+    if (subject === "custom" && !customSubject) {
+      return badRequest("Missing required field: customSubject");
     }
 
     if (!emailPattern.test(body.email)) {
@@ -29,12 +38,11 @@ export const POST: APIRoute = async ({ request }) => {
     }
 
     const payload = {
-      leadType,
-      fullName: body.fullName.trim(),
-      company: body.company.trim(),
-      role: body.role.trim(),
+      firstName: body.firstName.trim(),
+      lastName: body.lastName.trim(),
       email: body.email.trim(),
-      phone: typeof body.phone === "string" ? body.phone.trim() : "",
+      subject,
+      customSubject,
       country: typeof body.country === "string" ? body.country.trim() : "",
       message: body.message.trim(),
       consent: true,
