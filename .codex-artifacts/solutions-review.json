@@ -1,0 +1,162 @@
+{
+  "results": [
+    {
+      "width": 2276,
+      "scrollWidth": 2276,
+      "overflow": [],
+      "missingImages": [],
+      "deadAnchors": [],
+      "h1": 1,
+      "active": "/resitve",
+      "canonical": "https://www.kuem.si/resitve",
+      "animations": 0,
+      "mainFlow": [
+        "Zajem",
+        "Povezljivost",
+        "Integracije",
+        "Nexavia + KAI",
+        "NOC"
+      ],
+      "flowIcons": 10
+    },
+    {
+      "width": 1920,
+      "scrollWidth": 1920,
+      "overflow": [],
+      "missingImages": [],
+      "deadAnchors": [],
+      "h1": 1,
+      "active": "/resitve",
+      "canonical": "https://www.kuem.si/resitve",
+      "animations": 0,
+      "mainFlow": [
+        "Zajem",
+        "Povezljivost",
+        "Integracije",
+        "Nexavia + KAI",
+        "NOC"
+      ],
+      "flowIcons": 10
+    },
+    {
+      "width": 1440,
+      "scrollWidth": 1440,
+      "overflow": [],
+      "missingImages": [],
+      "deadAnchors": [],
+      "h1": 1,
+      "active": "/resitve",
+      "canonical": "https://www.kuem.si/resitve",
+      "animations": 0,
+      "mainFlow": [
+        "Zajem",
+        "Povezljivost",
+        "Integracije",
+        "Nexavia + KAI",
+        "NOC"
+      ],
+      "flowIcons": 10,
+      "links": [
+        {
+          "href": "/",
+          "status": 200
+        },
+        {
+          "href": "/resitve",
+          "status": 200
+        },
+        {
+          "href": "/#nexavia",
+          "status": 200
+        },
+        {
+          "href": "/#panoge",
+          "status": 200
+        },
+        {
+          "href": "/#zgodbe",
+          "status": 200
+        },
+        {
+          "href": "/#o-nas",
+          "status": 200
+        },
+        {
+          "href": "/#kontakt",
+          "status": 200
+        },
+        {
+          "href": "/_astro/nexavia-noc-dashboard.CRLtsIkb.png",
+          "status": 200
+        },
+        {
+          "href": "/panoge",
+          "status": 200
+        },
+        {
+          "href": "/zasebnost",
+          "status": 200
+        }
+      ]
+    },
+    {
+      "width": 1024,
+      "scrollWidth": 1024,
+      "overflow": [],
+      "missingImages": [],
+      "deadAnchors": [],
+      "h1": 1,
+      "active": "/resitve",
+      "canonical": "https://www.kuem.si/resitve",
+      "animations": 0,
+      "mainFlow": [
+        "Zajem",
+        "Povezljivost",
+        "Integracije",
+        "Nexavia + KAI",
+        "NOC"
+      ],
+      "flowIcons": 10
+    },
+    {
+      "width": 768,
+      "scrollWidth": 768,
+      "overflow": [],
+      "missingImages": [],
+      "deadAnchors": [],
+      "h1": 1,
+      "active": "/resitve",
+      "canonical": "https://www.kuem.si/resitve",
+      "animations": 0,
+      "mainFlow": [
+        "Zajem",
+        "Povezljivost",
+        "Integracije",
+        "Nexavia + KAI",
+        "NOC"
+      ],
+      "flowIcons": 10
+    },
+    {
+      "width": 390,
+      "scrollWidth": 390,
+      "overflow": [],
+      "missingImages": [],
+      "deadAnchors": [],
+      "h1": 1,
+      "active": "/resitve",
+      "canonical": "https://www.kuem.si/resitve",
+      "animations": 0,
+      "mainFlow": [
+        "Zajem",
+        "Povezljivost",
+        "Integracije",
+        "Nexavia + KAI",
+        "NOC"
+      ],
+      "flowIcons": 10
+    }
+  ],
+  "errors": [],
+  "normalAnimations": 12
+}

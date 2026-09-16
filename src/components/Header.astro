@@ -1,112 +1,94 @@
 ---
-import type { Locale } from "../lib/i18n";
-import { getNavItems } from "../lib/content";
-import { toggleLocale, withLocale } from "../lib/i18n";
-import { normalizePath, withBase } from "../lib/paths";
-
-const { locale = "en" } = Astro.props as { locale?: Locale };
-const path = normalizePath(Astro.url.pathname);
-const otherLocalePath = toggleLocale(path);
-const navItems = getNavItems(locale);
-const homeHref = withLocale("/", locale);
-const contactHref = withLocale("/contact#demo-form", locale);
+import wordmark from "../assets/brand/kuem/KUEM_Official_Wordmark.svg";
+import { alternatePath, type Locale } from "../lib/i18n";
+import { contactNavigation, primaryNavigation } from "../data/navigation";
+const { locale, pathname } = Astro.props as {
+  locale: Locale;
+  pathname: string;
+};
+const sl = locale === "sl";
+const currentPath = pathname.replace(/\/+$/, "") || "/";
+const nav = primaryNavigation[locale];
+const contact = contactNavigation[locale];
+const isActive = (href: string) => {
+  if (currentPath === href) return true;
+  if (href === "/resitve")
+    return (
+      currentPath.startsWith("/resitve/") ||
+      currentPath.startsWith("/sl/resitve/")
+    );
+  if (href === "/en/solutions") return currentPath.startsWith("/en/solutions/");
+  return false;
+};
 ---
+
 <header class="site-header">
   <div class="container header-inner">
-    <a href={withBase(homeHref)} class="brand" aria-label={locale === "sl" ? "KUEM domov" : "KUEM home"}>
-      <span class="brand-mark">K</span>
-      <span class="brand-text">KUEM</span>
-    </a>
-    <button
+    <a
+      class="brand"
+      href={sl ? "/" : "/en/"}
+      aria-label={sl ? "KUEM – domača stran" : "KUEM – home page"}
+      ><img src={wordmark.src} width="142" height="41" alt="KUEM" /></a
+    ><button
       class="menu-toggle"
       type="button"
       aria-expanded="false"
-      aria-controls="main-nav"
-      aria-label={locale === "sl" ? "Odpri meni" : "Open menu"}
-      data-menu-toggle
+      aria-controls="site-nav"
+      ><span></span><span></span><span></span><span class="sr-only"
+        >{sl ? "Meni" : "Menu"}</span
+      ></button
+    ><nav
+      id="site-nav"
+      aria-label={sl ? "Glavna navigacija" : "Main navigation"}
     >
-      <span></span>
-      <span></span>
-      <span></span>
-    </button>
-    <nav id="main-nav" class="main-nav" aria-label={locale === "sl" ? "Glavna navigacija" : "Main navigation"}>
       <ul class="nav-list">
         {
-          navItems.map((item) => (
+          nav.map(({ label, href }) => (
             <li>
-              <a
-                href={withBase(withLocale(item.href, locale))}
-                aria-current={path === normalizePath(withBase(withLocale(item.href, locale))) ? "page" : undefined}
-              >
-                {item.label}
+              <a href={href} aria-current={isActive(href) ? "page" : undefined}>
+                {label}
               </a>
             </li>
           ))
         }
         <li class="mobile-only">
-          <a href={withBase(contactHref)}>{locale === "sl" ? "Zahtevaj demo" : "Request a demo"}</a>
+          <a href={alternatePath(pathname)} lang={sl ? "en" : "sl"}
+            >{sl ? "EN" : "SLO"}</a
+          >
+        </li>
+        <li class="mobile-only mobile-contact-item">
+          <a class="header-contact" href={contact.href}
+            ><span>{contact.shortLabel}</span><i aria-hidden="true">→</i></a
+          >
         </li>
       </ul>
-    </nav>
-    <div class="header-actions">
-      <button
-        type="button"
-        class="btn btn-secondary theme-toggle"
-        data-theme-toggle
-        data-light-label={locale === "sl" ? "Svetla" : "Light"}
-        data-dark-label={locale === "sl" ? "Temna" : "Dark"}
+    </nav><div class="header-actions">
+      <a class="lang" href={alternatePath(pathname)} lang={sl ? "en" : "sl"}
+        >{sl ? "EN" : "SLO"}</a
+      ><a class="header-contact" href={contact.href}
+        ><span>{contact.label}</span><i aria-hidden="true">→</i></a
       >
-        {locale === "sl" ? "Temna" : "Dark"}
-      </button>
-      <a href={withBase(otherLocalePath)} class="btn btn-secondary">{locale === "sl" ? "EN" : "SL"}</a>
-      <a href={withBase(contactHref)} class="btn btn-primary">{locale === "sl" ? "Zahtevaj demo" : "Request a demo"}</a>
     </div>
   </div>
 </header>
-
 <script>
-  const headers = document.querySelectorAll(".site-header");
-  const themeButtons = document.querySelectorAll("[data-theme-toggle]");
-  const themeKey = "kuem-theme";
-
-  const applyTheme = (theme) => {
-    const safeTheme = theme === "light" ? "light" : "dark";
-    document.documentElement.dataset.theme = safeTheme;
-    localStorage.setItem(themeKey, safeTheme);
-    themeButtons.forEach((button) => {
-      const lightLabel = button.dataset.lightLabel || "Light";
-      const darkLabel = button.dataset.darkLabel || "Dark";
-      button.textContent = safeTheme === "light" ? lightLabel : darkLabel;
-    });
-  };
-
-  const currentTheme = document.documentElement.dataset.theme === "light" ? "light" : "dark";
-  applyTheme(currentTheme);
-
-  themeButtons.forEach((button) => {
-    button.addEventListener("click", () => {
-      const nextTheme = document.documentElement.dataset.theme === "light" ? "dark" : "light";
-      applyTheme(nextTheme);
-    });
+  const header = document.querySelector<HTMLElement>(".site-header");
+  const button = document.querySelector<HTMLButtonElement>(".menu-toggle");
+  const nav = document.querySelector<HTMLElement>("#site-nav");
+  button?.addEventListener("click", () => {
+    const open = button.getAttribute("aria-expanded") === "true";
+    button.setAttribute("aria-expanded", String(!open));
+    nav?.classList.toggle("open", !open);
   });
-
-  headers.forEach((header) => {
-    const toggle = header.querySelector("[data-menu-toggle]");
-    const nav = header.querySelector(".main-nav");
-    if (!toggle || !nav) return;
-
-    const setExpanded = (expanded) => {
-      toggle.setAttribute("aria-expanded", expanded ? "true" : "false");
-      header.classList.toggle("is-menu-open", expanded);
-    };
-
-    toggle.addEventListener("click", () => {
-      const expanded = toggle.getAttribute("aria-expanded") === "true";
-      setExpanded(!expanded);
-    });
-
-    nav.querySelectorAll("a").forEach((link) => {
-      link.addEventListener("click", () => setExpanded(false));
-    });
+  const updateHeader = () =>
+    header?.classList.toggle("is-scrolled", scrollY > 12);
+  updateHeader();
+  addEventListener("scroll", updateHeader, { passive: true });
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape") {
+      button?.setAttribute("aria-expanded", "false");
+      nav?.classList.remove("open");
+      button?.focus();
+    }
   });
 </script>

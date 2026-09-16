@@ -1,28 +1,34 @@
 ---
 import MainLayout from "../layouts/MainLayout.astro";
+import FeatureList from "../components/FeatureList.astro";
 ---
+
 <MainLayout
   title="About KUEM"
-  description="KUEM is an engineering-driven IoT solutions company focused on utility and infrastructure digitalization in the EU market."
+  description="KUEM digitalizes infrastructure, field data, remote reading, monitoring and integrations with its own Nexavia platform."
 >
   <section class="hero">
     <div class="container split">
       <div>
         <p class="eyebrow">Company</p>
-        <h1>Engineering-driven IoT company focused on utilities and infrastructure.</h1>
+        <h1>About KUEM</h1>
         <p>
-          KUEM combines field deployment experience, platform engineering, and integration expertise to deliver reliable
-          IoT outcomes for utility and industrial operators.
+          KUEM is a company for digitalization of infrastructure, field data,
+          remote reading, monitoring and integrations. The company develops and
+          implements solutions for municipalities, public utilities, industry,
+          energy and public buildings.
         </p>
       </div>
       <article class="panel">
-        <h2>What defines KUEM</h2>
-        <ul>
-          <li>Strong specialization in smart metering and utility operations</li>
-          <li>Nexavia platform for scalable deployment and integration</li>
-          <li>EU market focus with region-specific operational knowledge</li>
-          <li>Execution-oriented approach from pilot to rollout</li>
-        </ul>
+        <h2>How KUEM works</h2>
+        <FeatureList
+          items={[
+            "Own Nexavia platform",
+            "Field implementation and communication infrastructure",
+            "Integrations with existing systems",
+            "Work from concept to production",
+          ]}
+        />
       </article>
     </div>
   </section>

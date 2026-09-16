@@ -1,0 +1,120 @@
+[
+  {
+    "width": 1920,
+    "overflow": false,
+    "devices": 4,
+    "paths": 5,
+    "forbidden": false,
+    "labelsFit": true,
+    "reduced": {
+      "animations": 0,
+      "packets": 5,
+      "paused": true
+    },
+    "focus": true,
+    "anchor": {
+      "hash": "#povezljivost",
+      "top": 89.890625
+    },
+    "errors": []
+  },
+  {
+    "width": 1440,
+    "overflow": false,
+    "devices": 4,
+    "paths": 5,
+    "forbidden": false,
+    "labelsFit": true,
+    "allFourMoving": true,
+    "maxBusPackets": 3,
+    "reduced": {
+      "animations": 0,
+      "packets": 5,
+      "paused": true
+    },
+    "focus": true,
+    "anchor": {
+      "hash": "#povezljivost",
+      "top": 90.21875
+    },
+    "errors": []
+  },
+  {
+    "width": 1024,
+    "overflow": false,
+    "devices": 4,
+    "paths": 5,
+    "forbidden": false,
+    "labelsFit": true,
+    "reduced": {
+      "animations": 0,
+      "packets": 5,
+      "paused": true
+    },
+    "focus": true,
+    "anchor": {
+      "hash": "#povezljivost",
+      "top": 90
+    },
+    "errors": []
+  },
+  {
+    "width": 768,
+    "overflow": false,
+    "devices": 4,
+    "paths": 5,
+    "forbidden": false,
+    "labelsFit": true,
+    "reduced": {
+      "animations": 0,
+      "packets": 5,
+      "paused": true
+    },
+    "focus": true,
+    "anchor": {
+      "hash": "#povezljivost",
+      "top": 90.25
+    },
+    "errors": []
+  },
+  {
+    "width": 390,
+    "overflow": false,
+    "devices": 4,
+    "paths": 5,
+    "forbidden": false,
+    "labelsFit": true,
+    "allFourMoving": true,
+    "maxBusPackets": 2,
+    "reduced": {
+      "animations": 0,
+      "packets": 5,
+      "paused": true
+    },
+    "focus": true,
+    "anchor": {
+      "hash": "#povezljivost",
+      "top": 90.4375
+    },
+    "errors": []
+  },
+  {
+    "width": 320,
+    "overflow": false,
+    "devices": 4,
+    "paths": 5,
+    "forbidden": false,
+    "labelsFit": true,
+    "reduced": {
+      "animations": 0,
+      "packets": 5,
+      "paused": true
+    },
+    "focus": true,
+    "anchor": {
+      "hash": "#povezljivost",
+      "top": 90.375
+    },
+    "errors": []
+  }
+]

@@ -5,6 +5,7 @@ import { getMetrics } from "../lib/content";
 const { locale = "en" } = Astro.props as { locale?: Locale };
 const metrics = getMetrics(locale);
 ---
+
 <div class="metrics-grid">
   {
     metrics.map((metric) => (

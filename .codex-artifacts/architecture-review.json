@@ -1,0 +1,88 @@
+[
+  {
+    "viewport": 1920,
+    "overflow": false,
+    "paths": 5,
+    "packets": 6,
+    "kai": true,
+    "width": 868,
+    "reduced": {
+      "animations": 0,
+      "paused": true,
+      "squares": 5
+    },
+    "errors": []
+  },
+  {
+    "viewport": 1440,
+    "overflow": false,
+    "paths": 5,
+    "packets": 6,
+    "kai": true,
+    "width": 682,
+    "moving": true,
+    "reduced": {
+      "animations": 0,
+      "paused": true,
+      "squares": 5
+    },
+    "errors": []
+  },
+  {
+    "viewport": 1024,
+    "overflow": false,
+    "paths": 5,
+    "packets": 6,
+    "kai": true,
+    "width": 960,
+    "reduced": {
+      "animations": 0,
+      "paused": true,
+      "squares": 5
+    },
+    "errors": []
+  },
+  {
+    "viewport": 768,
+    "overflow": false,
+    "paths": 5,
+    "packets": 6,
+    "kai": true,
+    "width": 720,
+    "reduced": {
+      "animations": 0,
+      "paused": true,
+      "squares": 5
+    },
+    "errors": []
+  },
+  {
+    "viewport": 390,
+    "overflow": false,
+    "paths": 5,
+    "packets": 6,
+    "kai": true,
+    "width": 354,
+    "moving": true,
+    "reduced": {
+      "animations": 0,
+      "paused": true,
+      "squares": 5
+    },
+    "errors": []
+  },
+  {
+    "viewport": 320,
+    "overflow": false,
+    "paths": 5,
+    "packets": 6,
+    "kai": true,
+    "width": 284,
+    "reduced": {
+      "animations": 0,
+      "paused": true,
+      "squares": 5
+    },
+    "errors": []
+  }
+]

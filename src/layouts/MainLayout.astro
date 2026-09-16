@@ -2,37 +2,23 @@
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 import SeoHead from "../components/SeoHead.astro";
-import CookieConsent from "../components/CookieConsent.astro";
 import { getLocaleFromPath } from "../lib/i18n";
 import "../styles/global.css";
-
-const { title, description, pathname = Astro.url.pathname } = Astro.props;
+const {
+  title,
+  description,
+  pathname = Astro.url.pathname,
+  noindex = false,
+} = Astro.props;
 const locale = getLocaleFromPath(pathname);
 ---
+
 <!doctype html>
 <html lang={locale}>
-  <head>
-    <SeoHead title={title} description={description} pathname={pathname} />
-    <script is:inline>
-      (() => {
-        try {
-          const key = "kuem-theme";
-          const stored = localStorage.getItem(key);
-          const prefersLight = window.matchMedia("(prefers-color-scheme: light)").matches;
-          const theme = stored === "light" || stored === "dark" ? stored : prefersLight ? "light" : "dark";
-          document.documentElement.dataset.theme = theme;
-        } catch {
-          document.documentElement.dataset.theme = "dark";
-        }
-      })();
-    </script>
-  </head>
-  <body>
-    <Header locale={locale} />
-    <main>
+  <head><SeoHead {title} {description} {pathname} {noindex} /></head><body
+    ><a class="skip-link" href="#main"
+      >{locale === "sl" ? "Preskoči na vsebino" : "Skip to content"}</a
+    ><Header {locale} pathname={pathname} /><main id="main">
       <slot />
-    </main>
-    <Footer locale={locale} />
-    <CookieConsent locale={locale} />
-  </body>
+    </main><Footer {locale} /></body>
 </html>

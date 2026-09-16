@@ -1,0 +1,25 @@
+{
+  "results": [
+    {
+      "width": 1440,
+      "panelHeight": 1000,
+      "overflow": false
+    },
+    {
+      "width": 1024,
+      "panelHeight": 1000,
+      "overflow": false
+    },
+    {
+      "width": 768,
+      "panelHeight": 1000,
+      "overflow": false
+    },
+    {
+      "width": 390,
+      "panelHeight": 880,
+      "overflow": false
+    }
+  ],
+  "errors": []
+}

@@ -1,7 +1,8 @@
 import { defineConfig } from "astro/config";
+import sitemap from "@astrojs/sitemap";
 
 export default defineConfig({
-  site: "https://kuem-si.github.io",
-  base: "/website-vnext",
-  output: "static"
+  site: "https://www.kuem.si",
+  output: "static",
+  integrations: [sitemap()],
 });

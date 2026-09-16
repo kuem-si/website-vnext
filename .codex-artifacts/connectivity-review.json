@@ -1,0 +1,96 @@
+[
+  {
+    "width": 1920,
+    "overflow": false,
+    "rows": 4,
+    "targets": 1,
+    "labelsFit": true,
+    "dashed": 3,
+    "reduced": {
+      "animations": 0,
+      "packets": 4,
+      "paused": true
+    },
+    "errors": []
+  },
+  {
+    "width": 1440,
+    "overflow": false,
+    "rows": 4,
+    "targets": 1,
+    "labelsFit": true,
+    "dashed": 3,
+    "allMoving": true,
+    "geometry": {
+      "maxError": 0.966827392578125,
+      "maxSpine": 1
+    },
+    "reduced": {
+      "animations": 0,
+      "packets": 4,
+      "paused": true
+    },
+    "errors": []
+  },
+  {
+    "width": 1024,
+    "overflow": false,
+    "rows": 4,
+    "targets": 1,
+    "labelsFit": true,
+    "dashed": 3,
+    "reduced": {
+      "animations": 0,
+      "packets": 4,
+      "paused": true
+    },
+    "errors": []
+  },
+  {
+    "width": 768,
+    "overflow": false,
+    "rows": 4,
+    "targets": 1,
+    "labelsFit": true,
+    "dashed": 3,
+    "reduced": {
+      "animations": 0,
+      "packets": 4,
+      "paused": true
+    },
+    "errors": []
+  },
+  {
+    "width": 390,
+    "overflow": false,
+    "rows": 4,
+    "targets": 1,
+    "labelsFit": true,
+    "dashed": 3,
+    "allMoving": true,
+    "geometry": {
+      "maxError": 0.966339111328125,
+      "maxSpine": 1
+    },
+    "reduced": {
+      "animations": 0,
+      "packets": 4,
+      "paused": true
+    },
+    "errors": []
+  },
+  {
+    "width": 320,
+    "overflow": false,
+    "rows": 4,
+    "targets": 1,
+    "labelsFit": true,
+    "dashed": 3,
+    "reduced": {
+      "animations": 0,
+      "packets": 4,
+      "paused": true
+    },
+    "errors": []
+  }
+]

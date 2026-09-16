@@ -1,41 +1,5 @@
-﻿---
-import MainLayout from "../../layouts/MainLayout.astro";
-import LeadForm from "../../components/LeadForm.astro";
 ---
-<MainLayout
-  title="Kontakt KUEM"
-  description="Oddajte eno kontaktno povprasevanje za partnerstvo, demo, povprasevanje ali custom zadevo."
->
-  <section class="hero">
-    <div class="container">
-      <p class="eyebrow">Kontakt</p>
-      <h1>Govorite s KUEM o prioritetah vase uvedbe.</h1>
-      <p>
-        Uporabite spodnji obrazec za partnerstvo, demo, povprasevanje ali custom zadevo. Oddaje se obdelujejo prek GDPR
-        skladnih obrazcev in se lahko posredujejo v Odoo CRM.
-      </p>
-    </div>
-  </section>
+import Page from "./kontakt.astro";
+---
 
-  <section>
-    <div class="container">
-      <LeadForm
-        locale="sl"
-        formId="demo-form"
-        heading="Kontaktni obrazec"
-        submitLabel="Poslji zahtevo"
-        sourcePage="contact-sl"
-      />
-    </div>
-  </section>
-
-  <section>
-    <div class="container card">
-      <h2>Neposreden kontakt</h2>
-      <p>E-posta: <a href="mailto:info@kuem.eu">info@kuem.eu</a></p>
-      <p>Telefon: <a href="tel:+38659013416">0038659013416</a></p>
-      <p>Naslov: Ljubljanska cesta 24g, 4000 Kranj, Slovenia</p>
-    </div>
-  </section>
-</MainLayout>
-
+<Page />

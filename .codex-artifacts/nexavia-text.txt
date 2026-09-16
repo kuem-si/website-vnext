@@ -1,0 +1,246 @@
+﻿2: import MainLayout from "../layouts/MainLayout.astro";
+3: import NexaviaIntegration from "../components/NexaviaIntegration.astro";
+4: import logo from "../assets/brand/nexavia/official/NEXAVIA-web-Black.svg";
+5: import dashboard from "../assets/brand/nexavia/nexavia-noc-dashboard.png";
+6: import "../styles/nexavia.css";
+7: const roles = [
+9: id: "vodstvo", | vodstvo
+10: tab: "Vodstvo", | Vodstvo
+11: title: "Od kazalnika do odločitve.",
+12: items: [
+13: "Ključni kazalniki na enem mestu", | Ključni kazalniki na enem mestu
+14: "Primerjava obdobij in lokacij", | Primerjava obdobij in lokacij
+15: "Poročila za hitrejše odločanje", | Poročila za hitrejše odločanje
+17: icons: ["▥", "⌁", "▤"],
+20: id: "operativa", | operativa
+21: tab: "Operativa", | Operativa
+22: title: "Od opozorila do izvedenega ukrepa.",
+23: items: [
+24: "Pregled aktivnih dogodkov in alarmov", | Pregled aktivnih dogodkov in alarmov
+25: "Hiter dostop do lokacije in naprave", | Hiter dostop do lokacije in naprave
+26: "Sledenje obravnavi in izvedenim ukrepom", | Sledenje obravnavi in izvedenim ukrepom
+28: icons: ["△", "⌖", "✓"],
+31: id: "it", | it
+32: tab: "IT in skrbniki", | IT in skrbniki
+33: title: "Nadzor nad uporabniki, podatki in povezavami.",
+34: items: [
+35: "Upravljanje naprav in virov podatkov", | Upravljanje naprav in virov podatkov
+36: "Uporabniške vloge in pravice dostopa", | Uporabniške vloge in pravice dostopa
+37: "Pregled integracij in stanja sistema", | Pregled integracij in stanja sistema
+39: icons: ["⌘", "♙", "⌁"],
+42: const modules = [
+43: ["♧", "Voda in komunala", "Poraba, tlaki, izgube in kakovost."], | Voda in komunala
+44: ["ϟ", "Energija", "Poraba, moč in odstopanja."], | Energija
+45: ["◇", "Okolje", "Zrak, hrup in okoljski kazalniki."], | Okolje
+46: ["♧", "Mobilnost", "Prometni tokovi in trajnostna mobilnost."], | Mobilnost
+47: ["▥", "Javna infrastruktura", "Stanje objektov, naprav in vzdrževanja."], | Javna infrastruktura
+49: const stories = [
+50: ["Domplan", "Daljinsko spremljanje plinomerov."], | Domplan
+51: ["Brezovica", "Pregled vodomerov in komunalne infrastrukture."], | Brezovica
+52: ["Adria Mobil", "Energetski podatki proizvodnega okolja."], | Adria Mobil
+56: <MainLayout
+57: title="Nexavia | KUEM" | Nexavia | KUEM
+58: description="Nexavia združi podatke infrastrukture v uporaben pregled, opozorila in podlago za ukrep."
+60: nx-hero | nx-title
+61: container nx-hero-grid
+62: nx-hero-copy
+63: PLATFORMA NEXAVIA | nx-eyebrow | nx-title
+64: Vsi podatki infrastrukture. En uporaben pogled.
+65: nx-lead
+66: Nexavia združi podatke naprav, obstoječih sistemov in zunanjih virov
+67: ter jih spremeni v pregled, opozorilo in podlago za ukrep.
+68: nx-actions
+69: <a class="btn btn-primary" href="/kontakt" | btn btn-primary
+70: >Dogovorite se za predstavitev → </a | true
+71: ><a class="btn btn-secondary" href="#vloge" | btn btn-secondary
+72: >Oglejte si platformo ↘ </a | true
+74: nx-traits
+75: Modularna Prilagodljiva Povezljiva
+78: nx-hero-visual
+79: nx-window
+80: nx-window-bar
+81: </span | nx-dots | true
+82: Nexavia
+83: <img
+84: class="nx-dashboard" | nx-dashboard
+85: src=
+86: alt="Dejanski zaslon Nexavie: pregled naprav, alarmov in zemljevid infrastrukture" | Dejanski zaslon Nexavie: pregled naprav, alarmov in zemljevid infrastrukture
+87: width="2197"
+88: height="1224"
+89: fetchpriority="high" | high
+91: <span class="nx-status" | nx-status
+92: > Podatki so posodobljeni</span | true
+97: nx-trust | Zaupajo nam
+98: container
+99: ZAUPAJO NAM | nx-eyebrow | nx-trust-list
+100: CMC Group KOLEKTOR Telegroup <span
+101: >T-2</span
+102: > Vodotehnika
+106: <section
+107: class="nx-section nx-roles" | nx-section nx-roles
+108: id="vloge" | vloge
+109: aria-labelledby="nx-roles-title" | nx-roles-title
+111: container
+112: nx-role-heading
+114: NEXAVIA V VSAKODNEVNEM DELU <h2 | nx-eyebrow
+115: id="nx-roles-title" | nx-roles-title
+117: Pravi pogled za vsako vlogo.
+119: Vsak uporabnik vidi podatke in orodja, ki jih potrebuje za svoje
+120: delo.
+122: <div
+123: class="nx-tabs" | nx-tabs
+124: role="tablist" | tablist
+125: aria-label="Uporabniške vloge" | Uporabniške vloge
+128: roles.map((role, i) => (
+129: <button
+130: id={`tab-$ `}
+131: type="button" | button
+132: role="tab" | tab
+133: aria-selected= | true | false
+134: aria-controls={`panel-$ `}
+135: tabindex=
+136: data-role=
+145: roles.map((role, i) => (
+146: <div
+147: class="nx-role-panel" | nx-role-panel
+148: id={`panel-$ `}
+149: role="tabpanel" | tabpanel
+150: aria-labelledby={`tab-$ `}
+151: tabindex="0"
+152: data-panel=
+153: hidden=
+156: nx-role-screen nx-window
+157: nx-window-bar
+159: nx-dots | true
+166: Nexavia
+170: <img
+171: src=
+172: alt="Dejanski operativni pregled naprav in zemljevida v Nexavii" | Dejanski operativni pregled naprav in zemljevida v Nexavii
+173: width="2197"
+174: height="1224"
+175: loading="lazy" | lazy
+178: nx-demo
+179: Demo podatki | nx-demo-note
+180: Pregled | Upravljanje okolja
+181: nx-demo-cards
+183: ? ["Skupno število naprav", "Aktivni alarmi", "Območja"] | Skupno število naprav | Aktivni alarmi | Območja
+184: : ["Viri podatkov", "Uporabniki", "Integracije"] | Viri podatkov | Uporabniki | Integracije
+185: ).map((x, j) => (
+189: Aktivno
+194: nx-demo-chart
+195: Poraba skozi čas | Stanje sistema
+196: <svg
+197: viewBox="0 0 360 120"
+198: role="img" | img
+199: aria-label="Primer trendnega grafa" | Primer trendnega grafa
+201: <path
+202: M0 105H360M0 70H360M0 35H360
+203: stroke="#dce8f0"
+205: <path
+206: M0 95 L35 80 L65 88 L95 57 L125 77 L155 55 L185 63 L215 42 L245 65 L275 59 L305 31 L335 46 L360 18
+207: fill="none" | none
+208: stroke="#3795df"
+209: stroke-width="3"
+216: nx-role-copy
+220: {role.items.map((item, j) => (
+222: true
+227: nx-text-link
+228: Poglejte primer uporabe →
+238: nx-section nx-modules | nx-modules-title
+239: container
+240: MODULARNA PLATFORMA | nx-eyebrow | nx-modules-title
+241: Začnite z enim področjem. Razširite, ko potrebujete.
+242: nx-module-grid
+244: modules.map(([, title, copy], index) => (
+245: nx-module-card
+247: nx-module-icon | true
+248: <svg
+249: viewBox="0 0 48 48"
+250: fill="none" | none
+251: stroke="currentColor" | currentColor
+252: stroke-width="1.6"
+253: stroke-linecap="round" | round
+254: stroke-linejoin="round" | round
+256: {index === 0 && (
+257: M24 4C19 13 11 22 11 30a13 13 0 0 0 26 0C37 22 29 13 24 4Z M16 30c0 5 3 8 8 8
+259: {index === 1 && (
+260: M27 3 13 27h11l-3 18 15-26H25l2-16Z
+262: {index === 2 && (
+263: M39 7C21 8 9 18 9 31c0 7 5 11 12 11 15 0 21-19 18-35Z M13 38c5-10 12-16 21-23
+265: {index === 3 && (
+269: m10 34 11-18 8 18H10m19 0 9-18h-8m-9 0-3-6h-5
+272: {index === 4 && (
+273: M6 44V17h14v27m0-32V4h13v40m0-23h9v23M12 23h2m-2 7h2m12-18h2m-2 8h2m-2 8h2M3 44h42
+279: true
+287: nx-section nx-kai | nx-kai-title
+288: container nx-kai-grid
+290: KAI V NEXAVII | nx-eyebrow | nx-kai-title
+291: Ko pregled ni dovolj, KAI izpostavi, kaj zahteva pozornost.
+293: KAI analizira podatke znotraj Nexavie, zazna odstopanja in odgovorni
+294: osebi poda razumljivo opozorilo ter kontekst za naslednji korak.
+295: nx-kai-benefits
+296: Zaznavanje odstopanj Razumljiva opozorila
+297: Podpora odločitvam
+299: Človek ohrani nadzor nad odločitvijo. | nx-human
+300: nx-kai-panel
+301: nx-kai-panel-head
+302: KAI — zaznano odstopanje Visoka prioriteta</span
+304: nx-alert
+305: true
+306: Nepričakovana sprememba porabe <small
+307: >Primer opozorila · Demo podatki</small
+310: Poraba skozi čas <svg
+311: viewBox="0 0 460 150"
+312: role="img" | img
+313: aria-label="Demo trend porabe z oranžno označeno anomalijo" | Demo trend porabe z oranžno označeno anomalijo
+314: ><path d="M0 125H460M0 90H460M0 55H460M0 20H460" stroke="#e4edf3" | M0 125H460M0 90H460M0 55H460M0 20H460
+315: > <polyline
+316: points="0,104 25,95 50,105 75,98 100,106 125,91 150,97 175,88 200,96 225,89 250,98 275,94 300,102 325,92 350,100 375,94 400,37 415,90 440,94 460,89"
+317: fill="none" | none
+318: stroke="#438ddd"
+319: stroke-width="3"> <circle
+320: cx="400"
+321: cy="37"
+323: fill="#f06432"> </svg
+324: nx-recommendation
+325: Priporočen naslednji korak
+326: Preverite lokacijo in primerjajte zadnjih 7 dni.
+333: nx-section nx-stories | nx-stories-title
+334: container
+335: USPEŠNE ZGODBE | nx-eyebrow | nx-stories-title
+336: Nexavia v realnem okolju.
+337: nx-story-grid
+339: stories.map(([name, copy]) => (
+342: true
+347: nx-text-link
+348: Preberite zgodbo →
+359: nx-closing | nx-closing-title
+360: container nx-closing-inner
+362: Poglejte Nexavio na svojih podatkih. | nx-closing-title
+363: Na kratkem prikazu vam pokažemo, kako bi platforma podprla vaš
+364: konkretni primer uporabe.
+366: <a class="btn btn-primary" href="/kontakt" | btn btn-primary
+367: >Dogovorite se za predstavitev →</a
+373: const tabs = [
+374: ...document.querySelectorAll (".nx-tabs [role='tab']"),
+376: const panels = [...document.querySelectorAll (".nx-role-panel")];
+377: function activate(tab: HTMLButtonElement, focus = false) {
+378: tabs.forEach((item) => {
+379: const selected = item === tab;
+380: item.setAttribute("aria-selected", String(selected));
+381: item.tabIndex = selected ? 0 : -1;
+383: panels.forEach((panel) => {
+384: panel.hidden = panel.dataset.panel !== tab.dataset.role;
+386: if (focus) tab.focus();
+388: tabs.forEach((tab, index) => {
+389: tab.addEventListener("click", () => activate(tab)); | click
+390: tab.addEventListener("keydown", (event) => { | keydown
+391: let next = index;
+392: if (event.key === "ArrowRight") next = (index + 1) % tabs.length; | ArrowRight
+393: else if (event.key === "ArrowLeft") | ArrowLeft
+394: next = (index - 1 + tabs.length) % tabs.length;
+395: else if (event.key === "Home") next = 0; | Home
+396: else if (event.key === "End") next = tabs.length - 1; | End
+397: else return;
+398: event.preventDefault();
+399: activate(tabs[next], true);

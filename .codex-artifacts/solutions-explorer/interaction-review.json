@@ -1,0 +1,11 @@
+{
+  "directCards": 8,
+  "history": true,
+  "deepLink": true,
+  "animationCycles": 2,
+  "allPacketsMoving": true,
+  "reducedMotion": true,
+  "offscreenPause": true,
+  "mobileScrollRestore": true,
+  "errors": []
+}

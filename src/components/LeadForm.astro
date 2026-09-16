@@ -7,8 +7,14 @@ const {
   submitLabel = "Send request",
   sourcePage = "unknown",
   formId,
-  locale = "en"
-} = Astro.props;
+  locale = "en",
+} = Astro.props as {
+  heading?: string;
+  submitLabel?: string;
+  sourcePage?: string;
+  formId?: string;
+  locale?: Locale;
+};
 const statusId = `${formId || "lead"}-status`;
 const countryListId = `${formId || "lead"}-countries`;
 const apiPath = `${import.meta.env.BASE_URL}api/lead`;
@@ -17,22 +23,23 @@ const copy =
     ? {
         firstName: "Ime",
         lastName: "Priimek",
-        email: "E-posta",
+        email: "E-pošta",
         subject: "Zadeva",
-        customSubject: "Custom zadeva",
-        country: "Drzava",
-        message: "Sporocilo",
-        consent: "Soglasam, da KUEM hrani moje podatke za odgovor na povprasevanje v skladu z GDPR.",
+        customSubject: "Prilagojena zadeva",
+        country: "Država",
+        message: "Sporočilo",
+        consent:
+          "Soglašam, da KUEM hrani moje podatke za odgovor na povpraševanje v skladu z GDPR.",
         subjectPlaceholder: "Izberi zadevo",
         subjectPartnership: "Partnerstvo",
-        subjectDemo: "Demo",
-        subjectInquiry: "Povprasevanje",
-        subjectCustom: "Custom",
+        subjectDemo: "Predstavitev",
+        subjectInquiry: "Povpraševanje",
+        subjectCustom: "Drugo",
         blocked: "Oddaja je blokirana.",
-        submitting: "Posiljanje...",
+        submitting: "Pošiljanje...",
         success: "Hvala. Kmalu vas bomo kontaktirali.",
-        failed: "Oddaja ni uspela. Prosimo, pisite na info@kuem.eu.",
-        customRequired: "Vnesite custom zadevo."
+        failed: "Oddaja ni uspela. Prosimo, pišite na info@kuem.eu.",
+        customRequired: "Vnesite prilagojeno zadevo.",
       }
     : {
         firstName: "First name",
@@ -42,20 +49,28 @@ const copy =
         customSubject: "Custom subject",
         country: "Country",
         message: "Message",
-        consent: "I consent to KUEM storing my data to respond to this inquiry in line with GDPR.",
+        consent:
+          "I consent to KUEM storing my data to respond to this inquiry in line with GDPR.",
         subjectPlaceholder: "Select subject",
         subjectPartnership: "Partnership",
-        subjectDemo: "Demo",
+        subjectDemo: "Presentation",
         subjectInquiry: "Inquiry",
-        subjectCustom: "Custom",
+        subjectCustom: "Other",
         blocked: "Submission blocked.",
         submitting: "Submitting...",
         success: "Thank you. We will contact you shortly.",
         failed: "We could not submit the form. Please email info@kuem.eu.",
-        customRequired: "Please provide a custom subject."
+        customRequired: "Please provide a custom subject.",
       };
 ---
-<form class="lead-form" id={formId} data-lead-form data-source-page={sourcePage} data-api-path={apiPath}>
+
+<form
+  class="lead-form"
+  id={formId}
+  data-lead-form
+  data-source-page={sourcePage}
+  data-api-path={apiPath}
+>
   <h3>{heading}</h3>
   <div class="form-grid">
     <label>
@@ -86,7 +101,12 @@ const copy =
     </label>
     <label>
       {copy.country}
-      <input type="text" name="country" autocomplete="country-name" list={countryListId} />
+      <input
+        type="text"
+        name="country"
+        autocomplete="country-name"
+        list={countryListId}
+      />
     </label>
   </div>
   <datalist id={countryListId}>
@@ -96,7 +116,14 @@ const copy =
     {copy.message}
     <textarea name="message" rows="5" required></textarea>
   </label>
-  <input type="text" name="website" tabindex="-1" autocomplete="off" class="hp-field" aria-hidden="true" />
+  <input
+    type="text"
+    name="website"
+    tabindex="-1"
+    autocomplete="off"
+    class="hp-field"
+    aria-hidden="true"
+  />
   <label class="consent-check">
     <input type="checkbox" name="consent" value="yes" required />
     {copy.consent}
@@ -139,7 +166,7 @@ const copy =
         customSubject,
         country: String(data.get("country") || ""),
         message: String(data.get("message") || ""),
-        consent: data.get("consent") === "yes"
+        consent: data.get("consent") === "yes",
       };
 
       if (status) status.textContent = copy.submitting;
@@ -148,7 +175,7 @@ const copy =
         const response = await fetch(apiPath, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(payload)
+          body: JSON.stringify(payload),
         });
 
         const result = await response.json();
@@ -165,7 +192,9 @@ const copy =
     });
 
     const subjectField = form.querySelector('select[name="subject"]');
-    const customSubjectField = form.querySelector('input[name="customSubject"]');
+    const customSubjectField = form.querySelector(
+      'input[name="customSubject"]',
+    );
     const syncCustomSubjectState = () => {
       if (!subjectField || !customSubjectField) return;
       const isCustom = subjectField.value === "custom";

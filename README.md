@@ -1,34 +1,31 @@
-# KUEM Website (Astro)
+# KUEM corporate website
 
-## Run locally
+Production-oriented bilingual Astro website. Slovenian is the default language; English routes use `/en/`.
+
+## Local development
 
 ```bash
 npm install
 npm run dev
 ```
 
-## Build
+Production validation:
 
 ```bash
+npm run check
+npm run format:check
 npm run build
 npm run preview
 ```
 
-## Odoo CRM integration
+## Contact form
 
-Set the following environment variables for lead forwarding:
+Copy `.env.example` to `.env` and set `PUBLIC_CONTACT_ENDPOINT` to an approved HTTPS endpoint that accepts JSON POST requests. If it is absent, the form gives an honest configuration message and directs the visitor to `info@kuem.si`; it never displays fake success. The form uses browser validation and a honeypot. The receiving service must implement server-side validation, rate limiting, spam controls, retention and consent logging.
 
-- `ODOO_URL` (example: `https://your-odoo-domain.com`)
-- `ODOO_DB`
-- `ODOO_USERNAME`
-- `ODOO_API_KEY`
+## Content and brand assets
 
-If these are not set, the forms still return success locally but do not create CRM leads.
+Web-safe official assets are imported from `src/assets/brand`. Source archives remain in `brand-assets` and are never served. Draft references and insights live in Astro content collections and are intentionally not published until facts and publication approval are recorded. See `CONTENT_TODO.md`.
 
-## Forms
+## Deployment
 
-- `/contact` includes demo and partner forms.
-- Partner form is also on `/partner-program`.
-- Homepage includes a demo form section.
-
-All forms require explicit GDPR consent before submission.
+The build is static and canonical URLs currently use `https://www.kuem.si`. Confirm the production host and form endpoint before deployment. No deployment is performed by this repository task.

@@ -1,0 +1,324 @@
+﻿2: import MainLayout from "../layouts/MainLayout.astro";
+3: import from "../data/industry-explorer";
+4: import nexaviaLogo from "../assets/brand/nexavia/official/NEXAVIA-web-Black.svg";
+5: import "../styles/panoge.css";
+6: const initial = industryExplorer[0];
+7: const names = [
+8: "Domplan", | Domplan
+9: "Brezovica", | Brezovica
+10: "Adria Mobil", | Adria Mobil
+11: "Gradiška", | Gradiška
+12: "Novo mesto", | Novo mesto
+13: "Krk", | Krk
+15: const outcomes = [
+18: "Enoten pregled", | Enoten pregled
+19: "Pomembni podatki iz različnih virov so dostopni na enem mestu.",
+23: "Pravočasno obveščanje", | Pravočasno obveščanje
+24: "Odstopanja in dogodki dosežejo odgovorno osebo brez nepotrebnega iskanja.",
+28: "Podlaga za ukrep", | Podlaga za ukrep
+29: "Zgodovina, kontekst in primerjave pomagajo sprejeti boljšo odločitev.",
+32: const stories = [
+34: "Brezovica", | Brezovica
+35: "Pregled vodomerov in komunalne infrastrukture.",
+36: "komunala-in-energija", | komunala-in-energija
+38: ["Gradiška", "Kakovost zraka, hrup, promet in stanje okolja.", "okolje"], | Gradiška | okolje
+39: ["Adria Mobil", "Energetski podatki proizvodnega okolja.", "industrija"], | Adria Mobil | industrija
+40: ["Novo mesto", "Podatki za načrtovanje trajnostne mobilnosti.", "mobilnost"], | Novo mesto | mobilnost
+44: <MainLayout
+45: title="Panoge | KUEM" | Panoge | KUEM
+46: description="Podatki za okolja, ki morajo delovati. Izberite panogo in preverite, katere podatke spremljamo ter kaj z njimi pridobite."
+48: pi-page
+49: pi-hero | pi-title
+50: container pi-hero-grid
+51: pi-hero-copy
+52: PANOGE IN VERTIKALE | pi-eyebrow | pi-title
+53: Podatki za okolja, ki morajo delovati.
+55: Od komunalnih sistemov in javne infrastrukture do industrije,
+56: mobilnosti in turizma – rešitve prilagodimo dejanskemu okolju in
+57: načinu dela.
+58: pi-actions
+59: <a class="btn btn-primary" href="#izberite-podrocje" | btn btn-primary
+60: >Izberite svojo panogo → </a | true
+61: ><a class="btn btn-secondary" href="/kontakt" | btn btn-secondary
+62: >Pogovorimo se → </a | true
+66: pi-hero-board
+67: pi-board-heading
+68: PODROČJA UPORABE ŠEST PANOG, ENA PLATFORMA
+69: pi-hero-cards
+71: industryExplorer.map((industry, index) => (
+72: <button
+73: type="button" | button
+74: class="pi-hero-card" | pi-hero-card
+75: data-hero-industry=
+76: aria-pressed= | true | false
+79: <img
+80: src=
+81: width="176"
+82: height="144"
+83: alt=""
+84: aria-hidden="true" | true
+87: true
+96: pi-references | Izkušnje iz realnega okolja
+97: container
+98: IZKUŠNJE IZ REALNEGA OKOLJA <div | pi-eyebrow
+99: class="pi-reference-list" | pi-reference-list
+101: {names.map((name) => )}
+105: <section
+106: class="pi-explorer" | pi-explorer
+107: id="izberite-podrocje" | izberite-podrocje
+108: aria-labelledby="pi-explorer-title" | pi-explorer-title
+110: container
+111: IZBERITE PODROČJE | pi-eyebrow | pi-explorer-title
+112: Ista platforma. Različni operativni izzivi.
+113: pi-section-lead
+114: Izberite panogo in preverite, katere podatke spremljamo ter kaj
+115: uporabnik z njimi pridobi.
+116: pi-explorer-layout
+117: pi-tabs | tablist | Izberite panogo
+119: industryExplorer.map((industry, index) => (
+120: <button
+121: type="button" | button
+122: role="tab" | tab
+123: id={`pi-tab-$ `}
+124: aria-controls="pi-industry-panel" | pi-industry-panel
+125: aria-selected= | true | false
+126: tabindex=
+127: data-industry=
+130: <img
+131: src=
+132: width="176"
+133: height="144"
+134: alt=""
+135: aria-hidden="true" | true
+138: true
+144: <div
+145: class="pi-panel" | pi-panel
+146: id="pi-industry-panel" | pi-industry-panel
+147: role="tabpanel" | tabpanel
+148: aria-labelledby={`pi-tab-$ `}
+149: tabindex="0"
+151: pi-panel-heading
+152: <span class="pi-panel-symbol" | pi-panel-symbol
+153: ><img
+154: src=
+155: width="176"
+156: height="144"
+157: alt=""
+158: aria-hidden="true" | true
+159: /></span
+161: pi-eyebrow | pi-industry-eyebrow
+163: pi-industry-title
+164: id="pi-industry-description" | pi-industry-description
+170: <div
+171: class="pi-dashboard" | pi-dashboard
+172: aria-label="Demo prikaz Nexavia za izbrano panogo" | Demo prikaz Nexavia za izbrano panogo
+174: pi-app-sidebar
+175: <img
+176: src=
+177: width="115"
+178: height="36"
+179: alt="Nexavia" | Nexavia
+180: /> Pregled Operacije <span
+181: class="pi-app-active">Poraba</span | pi-app-active
+182: > Mobilnost Konfiguracija
+183: pi-app-main
+184: pi-app-header
+185: Pregled področja Občina Kranj · Demo
+186: pi-app-kpis
+188: initial.metrics.map((metric, index) => (
+191: pi-kpi-icon | true
+202: pi-app-visuals
+203: pi-app-chart
+204: Poraba v času <svg | pi-chart-title
+205: viewBox="0 0 440 190"
+206: role="img" | img
+207: aria-label="Primer časovnega grafa z demo podatki" | Primer časovnega grafa z demo podatki
+208: ><path
+209: M0 160H440M0 120H440M0 80H440M0 40H440
+210: stroke="#e4edf3"> <polyline
+211: points="0,142 20,135 40,142 60,124 80,130 100,120 120,125 140,108 160,116 180,100 200,110 220,93 240,103 260,84 280,94 300,74 320,90 340,72 360,85 380,57 400,65 420,42 440,52"
+212: fill="none" | none
+213: stroke="#3992df"
+214: stroke-width="3"> <polyline
+215: points="0,154 20,149 40,151 60,145 80,143 100,142 120,137 140,135 160,139 180,131 200,129 220,130 240,125 260,121 280,125 300,115 320,111 340,116 360,107 380,98 400,102 420,90 440,94"
+216: fill="none" | none
+217: stroke="#55bec8"
+218: stroke-width="2"> </svg
+220: pi-app-map
+221: <svg | pi-map-title
+222: viewBox="0 0 360 190"
+223: role="img" | img
+224: aria-label="Shematski demo zemljevid območja" | Shematski demo zemljevid območja
+225: ><rect width="360" height="190" fill="#f0f6f3"
+226: > <path
+227: M0 165Q80 90 170 140T360 60M10 30Q130 120 220 30T360 150
+228: fill="none" | none
+229: stroke="#9ed2e0"
+230: stroke-width="15"> <path
+231: M0 165Q80 90 170 140T360 60M10 30Q130 120 220 30T360 150
+232: fill="none" | none
+233: stroke="#fff"
+234: stroke-width="7"> <path
+235: M40 0 90 190M190 0 245 190M315 0 270 190
+236: stroke="#c9d5bf"
+237: stroke-width="3"> <circle
+238: cx="76"
+239: cy="97"
+241: fill="#26ab66"> <circle
+242: cx="166"
+243: cy="124"
+245: fill="#f06432"> <circle
+246: cx="230"
+247: cy="76"
+249: fill="#26ab66"> <circle
+250: cx="308"
+251: cy="103"
+253: fill="#e6af39"> </svg
+254: > Normalno · Opozorilo · Alarm
+256: pi-app-alert
+257: △ <span | true
+258: > <small | pi-event-title
+259: >Demo opozorilo za izbrano področje</small
+260: ></span
+261: true
+262: DEMO PODATKI | pi-demo-label
+265: pi-panel-details
+267: SPREMLJAMO | pi-eyebrow | pi-watch-list
+268: {initial.watch.map((item) => )}
+271: UPORABNIK PRIDOBI <ul | pi-eyebrow
+272: id="pi-gain-list" | pi-gain-list
+274: {initial.gain.map((item) => )}
+277: pi-panel-references
+279: PRIMERI IZ PRAKSE <strong | pi-eyebrow
+280: id="pi-industry-references"> </strong | pi-industry-references
+282: <a href="/reference"
+283: >Poglejte uspešne zgodbe → </a | true
+290: pi-results | pi-results-title
+291: container
+292: SKUPNI REZULTATI | pi-eyebrow | pi-results-title
+293: Različna okolja. Ista potreba po zanesljivih informacijah.
+294: pi-result-grid
+296: outcomes.map(([icon, title, copy]) => (
+299: true
+313: pi-stories | pi-stories-title
+314: container
+315: USPEŠNE ZGODBE | pi-eyebrow | pi-stories-title
+316: Rešitve v realnem okolju.
+317: pi-story-grid
+319: stories.map(([name, copy, icon]) => (
+322: <img
+323: src={
+324: industryExplorer.find((industry) => industry.id === icon)
+325: ?.icon
+327: width="176"
+328: height="144"
+329: alt=""
+330: aria-hidden="true" | true
+335: Preberite zgodbo → | true
+344: pi-closing | pi-closing-title
+345: container
+347: pi-closing-title
+348: Poiščimo pravi prvi korak za vaše okolje.
+350: Predstavite nam izziv. Skupaj preverimo podatke, obstoječo
+351: infrastrukturo in izvedljivo pot uvedbe.
+353: <a class="btn btn-primary" href="/kontakt" | btn btn-primary
+354: >Dogovorite se za uvodni sestanek → </a | true
+361: import from "../data/industry-explorer";
+362: const tabs = [
+363: ...document.querySelectorAll (".pi-tabs [role='tab']"),
+365: const heroButtons = [
+366: ...document.querySelectorAll (".pi-hero-card"),
+368: const panel = document.querySelector (".pi-panel");
+369: const byId = new Map(industryExplorer.map((item) => [item.id, item]));
+370: const setText = (selector: string, value: string) => {
+371: const node = document.querySelector (selector);
+372: if (node) node.textContent = value;
+374: const setList = (selector: string, items: string[]) => {
+375: const list = document.querySelector (selector);
+376: if (!list) return;
+377: list.replaceChildren(
+378: ...items.map((item) => {
+379: const li = document.createElement("li"); | li
+380: li.textContent = item;
+381: return li;
+385: function select(
+386: id: string,
+389: const item = byId.get(id);
+390: if (!item || !panel) return;
+391: tabs.forEach((tab) => {
+392: const active = tab.dataset.industry === id;
+393: tab.setAttribute("aria-selected", String(active));
+394: tab.tabIndex = active ? 0 : -1;
+395: if (active && focus) tab.focus();
+397: heroButtons.forEach((button) =>
+398: button.setAttribute(
+399: "aria-pressed",
+400: String(button.dataset.heroIndustry === id),
+403: panel.setAttribute("aria-labelledby", `pi-tab-$ `);
+404: panel.classList.add("pi-changing"); | pi-changing
+405: setText("#pi-industry-eyebrow", item.eyebrow);
+406: setText("#pi-industry-title", item.name);
+407: setText("#pi-industry-description", item.description);
+408: setText("#pi-industry-references", item.references);
+409: setText(
+410: "#pi-chart-title",
+411: id === "mobilnost" | mobilnost
+412: ? "Intenzivnost skozi čas" | Intenzivnost skozi čas
+413: : id === "okolje" | okolje
+414: ? "Meritve skozi čas" | Meritve skozi čas
+415: : "Poraba v času", | Poraba v času
+417: setText("#pi-map-title", item.map);
+418: setText("#pi-event-title", item.events);
+419: const activeView =
+420: id === "mobilnost" | mobilnost
+421: ? "Mobilnost" | Mobilnost
+422: : ["javna-infrastruktura", "okolje"].includes(id) | javna-infrastruktura | okolje
+423: ? "Pregled" | Pregled
+424: : "Poraba"; | Poraba
+425: document
+426: .querySelectorAll (".pi-app-sidebar > span")
+427: .forEach((view) =>
+428: view.classList.toggle(
+429: "pi-app-active", | pi-app-active
+430: view.textContent?.trim() === activeView,
+433: item.metrics.forEach((label, index) => {
+434: setText(`[data-metric-label="$ "]`, label); | ${index}
+435: setText(`[data-metric-value="$ "]`, item.metricValues[index]); | ${index}
+437: const symbol = document.querySelector (".pi-panel-symbol");
+438: const chosen = tabs
+439: .find((tab) => tab.dataset.industry === id)
+440: ?.querySelector("img"); | img
+441: if (symbol && chosen) symbol.replaceChildren(chosen.cloneNode(true));
+442: setList("#pi-watch-list", item.watch);
+443: setList("#pi-gain-list", item.gain);
+444: if (history && location.hash !== `#$ `)
+445: window.history.pushState( , "", `#$ `);
+446: requestAnimationFrame(() =>
+447: requestAnimationFrame(() => panel.classList.remove("pi-changing")), | pi-changing
+449: if (scroll)
+450: panel.scrollIntoView({
+451: behavior: matchMedia("(prefers-reduced-motion: reduce)").matches | (prefers-reduced-motion: reduce)
+452: ? "instant" | instant
+453: : "smooth", | smooth
+454: block: "start", | start
+457: tabs.forEach((tab, index) => {
+458: tab.addEventListener("click", () => select(tab.dataset.industry ?? "")); | click
+459: tab.addEventListener("keydown", (event) => { | keydown
+460: let next = index;
+461: if (event.key === "ArrowRight" || event.key === "ArrowDown") | ArrowRight | ArrowDown
+462: next = (index + 1) % tabs.length;
+463: else if (event.key === "ArrowLeft" || event.key === "ArrowUp") | ArrowLeft | ArrowUp
+464: next = (index - 1 + tabs.length) % tabs.length;
+465: else if (event.key === "Home") next = 0; | Home
+466: else if (event.key === "End") next = tabs.length - 1; | End
+467: else return;
+468: event.preventDefault();
+469: select(tabs[next].dataset.industry ?? "", );
+472: heroButtons.forEach((button) =>
+473: button.addEventListener("click", () => | click
+474: select(button.dataset.heroIndustry ?? "", ),
+477: const fromHash = () =>
+478: select(decodeURIComponent(location.hash.slice(1)), );
+479: addEventListener("popstate", fromHash); | popstate
+480: addEventListener("hashchange", fromHash); | hashchange
+481: fromHash();

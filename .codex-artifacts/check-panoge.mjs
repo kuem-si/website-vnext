@@ -1,0 +1,50 @@
+import { chromium } from "playwright";
+const browser=await chromium.launch({executablePath:"C:/Program Files/Google/Chrome/Application/chrome.exe",headless:true});
+const ids=["komunala-in-energija","javna-infrastruktura","okolje","industrija","mobilnost","turizem"];
+for(const width of [1440,1024,768,390]){
+  const page=await browser.newPage({viewport:{width,height:900}});
+  const errors=[];
+  page.on("pageerror",error=>errors.push(error.message));
+  page.on("console",message=>{if(message.type()==="error")errors.push(message.text())});
+  await page.goto("http://127.0.0.1:4321/panoge");
+  await page.locator(".pi-hero").screenshot({path:`.codex-artifacts/panoge-hero-${width}.png`});
+  await page.locator(".pi-explorer").screenshot({path:`.codex-artifacts/panoge-explorer-${width}.png`});
+  for(const id of ids){
+    await page.locator(`.pi-tabs [data-industry="${id}"]`).click();
+    if(new URL(page.url()).hash!==`#${id}`)errors.push(`Hash ${id}`);
+    if(await page.locator(`.pi-tabs [data-industry="${id}"]`).getAttribute("aria-selected")!=="true")errors.push(`Selection ${id}`);
+    const icon=await page.locator(`.pi-tabs [data-industry="${id}"] img`).evaluate(el=>({src:el.getAttribute("src"),loaded:el.complete&&el.naturalWidth>0,natural:[el.naturalWidth,el.naturalHeight]}));
+    const heroIcon=await page.locator(`.pi-hero-card[data-hero-industry="${id}"] img`).getAttribute("src");
+    const panelIcon=await page.locator(".pi-panel-symbol img").getAttribute("src");
+    if(!icon.loaded||Math.abs(icon.natural[0]/icon.natural[1]-176/144)>.01||icon.src!==heroIcon||icon.src!==panelIcon)errors.push(`Icon ${id} ${JSON.stringify({icon,heroIcon,panelIcon})}`);
+  }
+  const selected=page.locator('.pi-tabs [aria-selected="true"]');
+  await selected.focus();
+  await selected.press("ArrowRight");
+  if(await page.locator('[data-industry="komunala-in-energija"]').getAttribute("aria-selected")!=="true")errors.push("Keyboard navigation");
+  await page.goBack();
+  if(await page.locator('[data-industry="turizem"]').getAttribute("aria-selected")!=="true")errors.push("Keyboard back");
+  await page.goForward();
+  if(await page.locator('[data-industry="komunala-in-energija"]').getAttribute("aria-selected")!=="true")errors.push("Keyboard forward");
+  await page.locator('[data-hero-industry="okolje"]').click();
+  if(await page.locator("#pi-industry-title").textContent()!=="Okolje")errors.push("Hero card");
+  const layout=await page.evaluate(()=>({viewport:innerWidth,scrollWidth:document.documentElement.scrollWidth}));
+  console.log(JSON.stringify({width,layout,errors}));
+  await page.close();
+}
+const direct=await browser.newPage();
+await direct.goto("http://127.0.0.1:4321/panoge#turizem");
+console.log(JSON.stringify({directTitle:await direct.locator("#pi-industry-title").textContent()}));
+await direct.close();
+const home=await browser.newPage();
+await home.goto("http://127.0.0.1:4321/");
+await home.locator("#homepage-nav").getByRole("link",{name:"Panoge"}).click();
+console.log(JSON.stringify({homeMenuPath:new URL(home.url()).pathname}));
+await home.close();
+const homeMobile=await browser.newPage({viewport:{width:390,height:900}});
+await homeMobile.goto("http://127.0.0.1:4321/");
+await homeMobile.locator(".hp-menu").click();
+await homeMobile.locator("#homepage-nav").getByRole("link",{name:"Panoge"}).click();
+console.log(JSON.stringify({mobileMenuPath:new URL(homeMobile.url()).pathname}));
+await homeMobile.close();
+await browser.close();

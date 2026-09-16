@@ -1,0 +1,220 @@
+---
+import SeoHead from "../SeoHead.astro";
+import Chrome from "./SiteChrome.astro";
+import Cards from "./ServiceCards.astro";
+import Flow from "./ServiceFlow.astro";
+import Architecture from "./SolutionsArchitecture.astro";
+import ConnectivitySection from "./ConnectivitySection.astro";
+import AcquisitionSection from "./AcquisitionSection.astro";
+import IntegrationFlow from "./IntegrationFlow.astro";
+import NocNetwork from "./NocNetwork.astro";
+import {
+  solutionSections,
+  platformBenefits,
+  managedServices,
+} from "../../data/solutionsOverview";
+import { industries } from "../../data/homepage";
+import nexavia from "../../assets/brand/nexavia/Nexavia_Logo_Light.svg";
+import dashboard from "../../assets/brand/nexavia/nexavia-noc-dashboard.png";
+import "../../styles/global.css";
+import "../../styles/homepage.css";
+import "../../styles/solutions-overview.css";
+---
+
+<!doctype html>
+<html lang="sl">
+  <head
+    ><SeoHead
+      title="Rešitve | KUEM – Od zajema podatka do upravljane storitve"
+      description="KUEM povezuje zajem podatkov, povezljivost, integracije, platformo Nexavia, KAI ter NOC v celovite rešitve za upravljanje infrastrukture."
+      pathname="/resitve"
+    /></head
+  >
+  <body class="kuem-home sol-page">
+    <a class="skip-link" href="#main">Preskoči na vsebino</a>
+    <Chrome />
+    <main id="main">
+      <section class="sol-hero">
+        <div class="hp-wrap sol-hero-grid">
+          <div class="sol-hero-copy">
+            <p class="hp-eyebrow">Rešitve KUEM</p><h1>
+              Od zajema podatka do upravljane storitve.
+            </h1><p>
+              Povežemo naprave, komunikacijska omrežja, obstoječe sisteme in
+              podatke v rešitev, ki deluje kot celota.
+            </p><div class="hp-actions">
+              <a class="hp-button" href="/#kontakt"
+                >Pogovorimo se <span aria-hidden="true">→</span></a
+              ><a class="hp-button hp-outline" href="#zajem">Kako deluje</a>
+            </div>
+          </div>
+          <div class="sol-hero-visual">
+            <Architecture />
+          </div>
+        </div>
+      </section>
+      <nav class="sol-section-nav" aria-label="Sklopi rešitev">
+        <div class="hp-wrap">
+          {
+            solutionSections.map((item) => (
+              <a href={`#${item.id}`}>{item.label}</a>
+            ))
+          }
+        </div>
+      </nav>
+      <AcquisitionSection />
+      <ConnectivitySection />
+      <section id="integracije" class="sol-section sol-tint">
+        <div class="hp-wrap">
+          <p class="hp-eyebrow">03 · Integracije in avtomatizacija</p><h2>
+            Obstoječih sistemov ne zamenjamo. Povežemo jih.
+          </h2><IntegrationFlow />
+        </div>
+      </section>
+      <section id="nexavia-kai" class="sol-section">
+        <div class="hp-wrap">
+          <div class="sol-platform-grid">
+            <div class="sol-platform-copy">
+              <p class="hp-eyebrow">04 · Nexavia in KAI</p><div
+                class="hp-nexavia-mark hp-product-logo"
+              >
+                <img
+                  src={nexavia.src}
+                  width="1200"
+                  height="360"
+                  alt="Nexavia"
+                  loading="lazy"
+                />
+              </div><h2>
+                Podatki postanejo pregled, opozorilo in podlaga za ukrep.
+              </h2><p>
+                Nexavia združuje podatke iz različnih virov, jih prikaže v
+                razumljivi obliki in omogoča pravočasne odločitve.
+              </p>
+            </div>
+            <div>
+              <figure class="hp-browser">
+                <div class="hp-browser-bar" aria-hidden="true">
+                  <i></i><i></i><i></i><span></span>
+                </div><a
+                  href={dashboard.src}
+                  data-sol-dashboard
+                  aria-haspopup="dialog"
+                  aria-controls="solutions-dashboard"
+                  aria-label="Povečaj originalni Nexavia dashboard"
+                  ><img
+                    src={dashboard.src}
+                    width={dashboard.width}
+                    height={dashboard.height}
+                    alt="Originalni Nexavia Network Operations Center z zemljevidom naprav, alarmi, stanjem omrežja in kakovostjo podatkov"
+                    loading="lazy"
+                    decoding="async"
+                  /><span class="hp-enlarge"
+                    >Povečaj prikaz <span aria-hidden="true">↗</span></span
+                  ></a
+                >
+              </figure><Cards items={platformBenefits} horizontal />
+            </div>
+          </div>
+          <div class="sol-kai-panel">
+            <strong class="sol-kai-label">KAI</strong><p>
+              KAI izpostavi odstopanja in odgovorni osebi pomaga razumeti, kaj
+              zahteva pozornost.
+            </p><div class="sol-alert">
+              <svg viewBox="0 0 32 32" fill="none" aria-hidden="true"
+                ><path d="m16 3 14 25H2L16 3Zm0 9v8m0 3v1"></path></svg
+              ><div>
+                <span class="sol-example">Primer opozorila</span><h3>
+                  Zaznano odstopanje
+                </h3><p>Povečan pretok na odseku Kranj – Primskovo.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section id="noc" class="sol-section sol-noc">
+        <div class="hp-wrap sol-two-col">
+          <div>
+            <p class="hp-eyebrow">05 · NOC in upravljane storitve</p><h2>
+              Rešitve spremljamo tudi po uvedbi.
+            </h2><p>
+              Stalni nadzor, odzivanje, vzdrževanje in strokovna podpora
+              zagotavljajo dolgoročno zanesljivo delovanje.
+            </p><Cards items={managedServices} compact />
+          </div><NocNetwork />
+        </div>
+      </section>
+      <section class="sol-section sol-tint sol-end-to-end">
+        <div class="hp-wrap">
+          <h2>Ena pot. En odgovoren partner.</h2><Flow /><p>
+            Visoka avtomatizacija in robustnost prenosa podatkov od zajema
+            podatkov na napravi do napredne analitike v skoraj realtime.
+          </p>
+        </div>
+      </section>
+      <section class="sol-section sol-industries">
+        <div class="hp-wrap">
+          <p class="hp-eyebrow">Prilagojeno dejanskemu okolju</p><div
+            class="hp-section-heading"
+          >
+            <h2>Rešitve za različne izzive infrastrukture.</h2><a
+              class="hp-text-link"
+              href="/panoge"
+              >Oglejte si panoge <span aria-hidden="true">→</span></a
+            >
+          </div><Cards
+            items={industries.map(({ icon, title }) => ({ icon, title }))}
+            compact
+            horizontal
+          />
+        </div>
+      </section>
+      <section class="hp-closing">
+        <div class="hp-wrap">
+          <div>
+            <h2>Začnimo z enim konkretnim izzivom.</h2><p>
+              Izberemo primer uporabe, preverimo razpoložljive podatke in
+              predlagamo izvedljiv prvi korak.
+            </p>
+          </div><a class="hp-button" href="/#kontakt"
+            >Dogovorite se za uvodni sestanek <span aria-hidden="true">→</span
+            ></a
+          >
+        </div>
+      </section>
+    </main>
+    <Chrome footer />
+    <dialog
+      id="solutions-dashboard"
+      class="hp-dialog"
+      aria-label="Povečan Nexavia dashboard"
+    >
+      <button type="button" data-sol-dashboard-close>Zapri ×</button><img
+        src={dashboard.src}
+        width={dashboard.width}
+        height={dashboard.height}
+        alt="Povečan originalni Nexavia Network Operations Center"
+        loading="lazy"
+      />
+    </dialog>
+    <script>
+      const dialog = document.querySelector<HTMLDialogElement>(
+        "#solutions-dashboard",
+      );
+      document
+        .querySelector("[data-sol-dashboard]")
+        ?.addEventListener("click", (event) => {
+          if (dialog) {
+            event.preventDefault();
+            dialog.showModal();
+          }
+        });
+      document
+        .querySelector("[data-sol-dashboard-close]")
+        ?.addEventListener("click", () => dialog?.close());
+      dialog?.addEventListener("click", (event) => {
+        if (event.target === dialog) dialog.close();
+      });
+    </script>
+  </body>
+</html>
